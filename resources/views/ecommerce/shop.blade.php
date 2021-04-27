@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Về chúng tôi')
+@section('title', 'Đồ điện tử')
 @section('class-body', 'home-page home-01')
 @section('class-main', 'main-site left-sidebar')
 

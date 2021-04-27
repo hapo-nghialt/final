@@ -40,3 +40,11 @@ Route::get('/about-us', function () {
 Route::get('/shop', function () {
     return view('ecommerce.shop');
 })->name('user.shop');
+
+Route::get('/checkout', function () {
+    return view('ecommerce.checkout');
+})->name('user.checkout');
+
+Route::get('/contact-us', function () {
+    return view('ecommerce.contact-us');
+})->name('user.contact-us');
