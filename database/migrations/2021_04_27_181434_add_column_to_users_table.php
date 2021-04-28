@@ -14,8 +14,8 @@ class AddColumnToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->text('role')->after('password')->nullable();
-            $table->text('address')->after('role')->nullable();
+            $table->text('role_id')->after('password')->nullable();
+            $table->text('address')->after('role_id')->nullable();
             $table->string('avatar')->after('address')->nullable();
         });
     }

@@ -25,14 +25,6 @@ Route::get('/cart', function () {
     return view('ecommerce.cart');
 })->name('user.cart');
 
-Route::get('/login', function () {
-    return view('ecommerce.login');
-})->name('user.login');
-
-Route::get('/register', function () {
-    return view('ecommerce.register');
-})->name('user.register');
-
 Route::get('/about-us', function () {
     return view('ecommerce.about-us');
 })->name('user.about-us');
@@ -48,3 +40,11 @@ Route::get('/checkout', function () {
 Route::get('/contact-us', function () {
     return view('ecommerce.contact-us');
 })->name('user.contact-us');
+
+Route::get('/admin', function () {
+    return view('admin.index');
+})->name('admin.index');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

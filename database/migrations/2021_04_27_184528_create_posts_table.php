@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->text('status');
             $table->text('description');
             $table->integer('user_id');
+            $table->integer('category_id');
             $table->tinyInteger('show_status');
             $table->tinyInteger('bought_status');
             $table->text('address');
