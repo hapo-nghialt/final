@@ -12,10 +12,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
-Route::get('/', function () {
-    return view('ecommerce.home');
-})->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/', [App\Http\Controllers\EcommerceController::class, 'index'])->name('home');
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth.admin'], function() {
+    Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('home');
+    Route::resource('users', App\Http\Controllers\Admin\UserController::class);
+});
 
 Route::get('/detail', function () {
     return view('ecommerce.detail');
@@ -40,11 +46,3 @@ Route::get('/checkout', function () {
 Route::get('/contact-us', function () {
     return view('ecommerce.contact-us');
 })->name('user.contact-us');
-
-Route::get('/admin', function () {
-    return view('admin.index');
-})->name('admin.index');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
