@@ -18,15 +18,13 @@
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <fieldset class="wrap-title">
-                                <h3 class="form-title">Log in to your account</h3>
+                                <h3 class="form-title">ĐĂNG NHẬP</h3>
                             </fieldset>
-                            <fieldset class="wrap-input">
-                                <label for="frm-login-uname">Email Address:</label>
-                                <input type="text" id="frm-login-uname" name="login_email" placeholder="Type your email address">
+                            <fieldset class="wrap-input login-input">
+                                <input type="text" id="frm-login-uname" name="login_email" placeholder="Tên đăng nhập">
                             </fieldset>
-                            <fieldset class="wrap-input">
-                                <label for="frm-login-pass">Password:</label>
-                                <input type="password" id="frm-login-pass" name="login_password" placeholder="************">
+                            <fieldset class="wrap-input login-input">
+                                <input type="password" id="frm-login-pass" name="login_password" placeholder="Mật khẩu">
                             </fieldset>
 
                             <fieldset class="wrap-input">

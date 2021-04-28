@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href={{ asset('css/owl.carousel.min.css') }}>
     <link rel="stylesheet" type="text/css" href={{ asset('css/flexslider.css') }}>
     <link rel="stylesheet" type="text/css" href={{ asset('css/chosen.min.css') }}>
+    <link rel="stylesheet" type="text/css" href={{ asset('css/app.css') }}>
     <link rel="stylesheet" type="text/css" href={{ asset('css/style.css') }}>
     <link rel="stylesheet" type="text/css" href={{ asset('css/color-01.css') }}>
 </head>
@@ -28,7 +29,7 @@
 
     <header id="header" class="header header-style-1">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row d-block">
                 <div class="topbar-menu-area">
                     <div class="container">
                         <div class="topbar-menu left-menu">
