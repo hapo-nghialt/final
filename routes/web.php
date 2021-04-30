@@ -23,6 +23,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth.admin
     Route::resource('users', App\Http\Controllers\Admin\UserController::class);
 });
 
+Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => 'auth.user'], function() {
+    Route::get('/post', );
+});
+
 Route::get('/detail', function () {
     return view('ecommerce.detail');
 });

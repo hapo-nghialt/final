@@ -583,7 +583,7 @@ input,textarea{
 	width: 182px;
 }
 .header .main-info-area .right-section{
-	width: 280px;
+	width: 250px;
 }
 .main-info-area .right-section .wrap-icon-section{
 	display: inline-block;
@@ -598,7 +598,6 @@ header.fill-color .main-info-area .right-section .wrap-icon-section .title{
 }
 .main-info-area .right-section .wrap-icon-section .title{
 	font-size: 12px;
-	color: #333333;
 	text-transform: uppercase;
 	font-weight: 600;
 	display: block;
@@ -626,7 +625,6 @@ header.fill-color .main-info-area .right-section .wrap-icon-section .link-direct
     display: block;
     float: left;
     font-size: 25px;
-    color: #aaa;
     margin: 7px 8px 0 0;
 }
 .main-info-area .right-section .wrap-icon-section .left-info{

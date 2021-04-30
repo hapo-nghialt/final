@@ -25910,3 +25910,25 @@ readers do not read off random characters that represent icons */
 .login-input {
   margin: 20px 0;
 }
+
+.main-info-area .right-section .wrap-icon-section .title {
+  color: #333333;
+}
+.main-info-area .right-section .wrap-icon-section .link-direction > i {
+  color: #aaa;
+}
+.main-info-area .right-section .wrap-icon-section .link-new-post {
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  background-color: #fe9900;
+}
+.main-info-area .right-section .wrap-icon-section .link-new-post:hover {
+  background-color: #cc7a00;
+}
+.main-info-area .right-section .wrap-icon-section .link-new-post .title {
+  color: #ffffff;
+}
+.main-info-area .right-section .wrap-icon-section .link-new-post > i {
+  color: #ffffff;
+}

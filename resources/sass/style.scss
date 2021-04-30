@@ -1,3 +1,33 @@
 .login-input {
-    margin: 20px 0;
+  margin: 20px 0;
+}
+
+.main-info-area {
+  .right-section {
+    .wrap-icon-section {
+      .title {
+        color: #333333;
+      }
+      .link-direction {
+        >i {
+          color: #aaa;
+        }
+      }
+      .link-new-post {
+        padding: 5px 10px;
+        border-radius: 4px;
+        margin-top: 10px;
+        background-color: #fe9900;
+        &:hover {
+          background-color: #cc7a00;
+        }
+        .title {
+          color: #ffffff;
+        }
+        >i {
+          color: #ffffff;
+        }
+      }
+    }
+  }
 }

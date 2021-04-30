@@ -147,11 +147,12 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="wrap-icon-section show-up-after-1024">
-                                <a href="#" class="mobile-navigation">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
+                            <div class="wrap-icon-section w-100 d-flex justify-content-center">
+                                <a class="link-direction link-new-post d-flex align-items-center" href={{ route('user.cart') }}>
+                                    <i class="fas fa-cart-plus" aria-hidden="true"></i>
+                                    <div class="left-info">
+                                        <span class="title">new post</span>
+                                    </div>
                                 </a>
                             </div>
                         </div>
