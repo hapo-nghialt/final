@@ -143,18 +143,20 @@
                                     <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                                     <div class="left-info">
                                         <span class="index">4 items</span>
-                                        <span class="title">CART</span>
+                                        <span class="title">cart</span>
                                     </div>
                                 </a>
                             </div>
+                            @if(Auth::check())
                             <div class="wrap-icon-section w-100 d-flex justify-content-center">
-                                <a class="link-direction link-new-post d-flex align-items-center" href={{ route('user.cart') }}>
+                                <a class="link-direction link-new-post d-flex align-items-center" href={{ route('user.posts.index') }}>
                                     <i class="fas fa-cart-plus" aria-hidden="true"></i>
                                     <div class="left-info">
                                         <span class="title">new post</span>
                                     </div>
                                 </a>
                             </div>
+                            @endif
                         </div>
 
                     </div>

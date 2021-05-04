@@ -24,7 +24,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth.admin
 });
 
 Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => 'auth.user'], function() {
-    Route::get('/post', );
+    Route::resource('posts', \App\Http\Controllers\PostController::class);
 });
 
 Route::get('/detail', function () {

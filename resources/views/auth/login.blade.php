@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Đăng nhập')
+@section('title', 'Login')
 @section('class-body', 'home-page home-01')
 @section('class-main', 'main-site left-sidebar')
 
@@ -18,15 +18,24 @@
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <fieldset class="wrap-title">
-                                <h3 class="form-title">ĐĂNG NHẬP</h3>
+                                <h3 class="form-title">login</h3>
                             </fieldset>
                             <fieldset class="wrap-input login-input">
-                                <input type="text" id="frm-login-uname" name="login_email" placeholder="Tên đăng nhập">
+                                <input type="text" id="frm-login-uname" name="username" placeholder="Username" value="{{ old('username') }}">
+                                @if ($errors->has('username'))
+                                    <span class="invalid-feedback d-inline-block" role="alert">
+                                    <strong>{{ $errors->first('username') }}</strong>
+                                </span>
+                                @endif
                             </fieldset>
                             <fieldset class="wrap-input login-input">
-                                <input type="password" id="frm-login-pass" name="login_password" placeholder="Mật khẩu">
+                                <input type="password" id="frm-login-pass" name="password" placeholder="Password">
+                                @if ($errors->has('password'))
+                                    <span class="invalid-feedback d-inline-block" role="alert">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
+                                @endif
                             </fieldset>
-
                             <fieldset class="wrap-input">
                                 <label class="remember-field">
                                     <input class="frm-input " name="rememberme" id="rememberme" value="forever" type="checkbox"><span>Remember me</span>
@@ -37,7 +46,7 @@
                         </form>
                     </div>
                 </div>
-            </div><!--end main products area-->
+            </div>
         </div>
-    </div><!--end row-->
+    </div>
 @endsection

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -31,6 +33,8 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    protected $username;
+
     /**
      * Create a new controller instance.
      *
@@ -39,24 +43,32 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->username = 'username';
+    }
+
+    public function username()
+    {
+        return $this->username;
     }
 
     protected function attemptLogin(Request $request)
     {
         return $this->guard()->attempt(
             [
-                'email' => $request->login_email,
-                'password' => $request->login_password,
+                'username' => $request->username,
+                'password' => $request->password,
             ],
         );
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         if ($this->attemptLogin($request)) {
             if (Auth::user()) {
                 return redirect()->route('home');
             }
         }
+
+        return $this->sendFailedLoginResponse($request);
     }
 }

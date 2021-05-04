@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => 'Le Trong Nghia',
+            'username' => 'nghialt',
             'email' => 'nghialt@haposoft.com',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
@@ -29,6 +30,7 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => 'User Test',
+            'username' => 'user01',
             'email' => 'user01@haposoft.com',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),

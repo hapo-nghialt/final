@@ -7,7 +7,7 @@
     <div class="wrap-breadcrumb">
         <ul>
             <li class="item-link"><a href="#" class="link">home</a></li>
-            <li class="item-link"><span>Register</span></li>
+            <li class="item-link"><span>register</span></li>
         </ul>
     </div>
     <div class="row">
@@ -18,31 +18,54 @@
                         <form method="POST" class="form-stl" action={{ route('register') }}>
                             @csrf
                             <fieldset class="wrap-title">
-                                <h3 class="form-title">Đăng ký</h3>
+                                <h3 class="form-title">register</h3>
                             </fieldset>
                             <fieldset class="wrap-input login-input">
-                                <input type="text" id="frm-reg-lname" name="name" placeholder="Tên đăng ký (bắt buộc)">
+                                <input type="text" id="frm-reg-lname" name="name" placeholder="Fullname (required)">
+                                @if ($errors->has('name'))
+                                    <span class="invalid-feedback d-inline-block" role="alert">
+                                    <strong>{{ $errors->first('name') }}</strong>
+                                </span>
+                                @endif
                             </fieldset>
                             <fieldset class="wrap-input login-input">
-                                <input type="email" id="frm-reg-email" name="email" placeholder="Email (bắt buộc)">
+                                <input type="text" id="frm-reg-lname" name="username" placeholder="Username (required)">
+                                @if ($errors->has('username'))
+                                    <span class="invalid-feedback d-inline-block" role="alert">
+                                    <strong>{{ $errors->first('username') }}</strong>
+                                </span>
+                                @endif
+                            </fieldset>
+                            <fieldset class="wrap-input login-input">
+                                <input type="email" id="frm-reg-email" name="email" placeholder="Email (required)">
+                                @if ($errors->has('email'))
+                                    <span class="invalid-feedback d-inline-block" role="alert">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                                @endif
                             </fieldset>
                             <fieldset class="wrap-input item-width-in-half left-item login-input">
-                                <input type="password" id="frm-reg-pass" name="password" placeholder="Mật khẩu">
+                                <input type="password" id="frm-reg-pass" name="password" placeholder="Password">
+                                @if ($errors->has('password'))
+                                    <span class="invalid-feedback d-inline-block" role="alert">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
+                                @endif
                             </fieldset>
                             <fieldset class="wrap-input item-width-in-half login-input">
-                                <input type="password" id="frm-reg-confirm-password" name="confirm_password" placeholder="Nhập lại mật khẩu">
+                                <input type="password" id="frm-reg-confirm-password" name="password_confirmation" placeholder="Confirm password">
                             </fieldset>
                             <fieldset class="wrap-input login-input">
-                                <input type="text" id="frm-reg-phone-number" name="phone_number" placeholder="Số điện thoại">
+                                <input type="text" id="frm-reg-phone-number" name="phone_number" placeholder="Phone number">
                             </fieldset>
                             <fieldset class="wrap-input login-input">
-                                <input type="text" id="frm-reg-address" name="address" placeholder="Địa chỉ">
+                                <input type="text" id="frm-reg-address" name="address" placeholder="Address">
                             </fieldset>
                             <input type="submit" class="btn btn-sign" value="Register" name="register">
                         </form>
                     </div>
                 </div>
-            </div><!--end main products area-->
+            </div>
         </div>
-    </div><!--end row-->
+    </div>
 @endsection
