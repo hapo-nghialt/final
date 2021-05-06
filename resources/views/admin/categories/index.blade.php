@@ -34,19 +34,17 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Address</th>
+                                    <th>Description</th>
+                                    <th>Items</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($user as $key => $value)
+                                @foreach($categories as $key => $value)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ $value->name }}</td>
-                                        <td>{{ $value->email }}</td>
-                                        <td>{{ $value->phone_number }}</td>
-                                        <td>{{ $value->address }}</td>
+                                        <td>{{ $value->title }}</td>
+                                        <td>{{ $value->description }}</td>
+                                        <td>{{ $value->item_count }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

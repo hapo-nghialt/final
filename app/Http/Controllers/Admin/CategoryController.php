@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class PostController extends Controller
     public function index()
     {
         $categories = Category::get();
-        return view('posts.index', compact('categories'));
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -25,8 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::get();
-        return view('posts.create', compact('categories'));
+        //
     }
 
     /**
@@ -37,7 +37,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        dd('12341233124');
+        //
     }
 
     /**

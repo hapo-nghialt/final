@@ -21,10 +21,11 @@ Route::get('/', [App\Http\Controllers\EcommerceController::class, 'index'])->nam
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth.admin'], function() {
     Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('home');
     Route::resource('users', App\Http\Controllers\Admin\UserController::class);
+    Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
 });
 
 Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => 'auth.user'], function() {
-    Route::resource('posts', \App\Http\Controllers\PostController::class);
+    Route::resource('posts', App\Http\Controllers\PostController::class);
 });
 
 Route::get('/detail', function () {

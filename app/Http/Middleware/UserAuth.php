@@ -18,7 +18,7 @@ class UserAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && (Auth::user()->role_id == User::ROLE['user'])) {
+        if (Auth::check()) {
             return $next($request);
         } else {
             return redirect()->route('home');

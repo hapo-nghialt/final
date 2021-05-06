@@ -97,7 +97,7 @@
                     <a href="#" class="dropdown-item">
                         <!-- Message Start -->
                         <div class="media">
-                            <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                            <img src="https://cdn1.iconfinder.com/data/icons/shiba-inu/500/Shiba_Inu_Emoticon-14-512.png" alt="User Avatar" class="img-size-50 img-circle mr-3">
                             <div class="media-body">
                                 <h3 class="dropdown-item-title">
                                     Nora Silvester
@@ -201,9 +201,26 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href={{ route('admin.users.index') }} class="nav-link active">
+                                <a href="{{ route('admin.users.index') }}" class="nav-link active">
                                     <i class="fas fa-list-ol nav-icon"></i>
                                     <p>Member list</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-sitemap"></i>
+                            <p>
+                                Category management
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.categories.index') }}" class="nav-link active">
+                                    <i class="fas fa-list-ol nav-icon"></i>
+                                    <p>Category list</p>
                                 </a>
                             </li>
                         </ul>

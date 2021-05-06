@@ -71,6 +71,7 @@
                                         @if (Auth::user()->role_id == \App\Models\User::ROLE['admin'])
                                             <li class="menu-item"><a href={{ route('admin.home') }}>Admin Page</a></li>
                                         @endif
+                                        <li class="menu-item"><a href={{ route('user.posts.index') }}>Posts</a></li>
                                         <li class="menu-item" ><a href="javascript:$('#logout-form').submit()">Logout</a></li>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf
@@ -149,7 +150,7 @@
                             </div>
                             @if(Auth::check())
                             <div class="wrap-icon-section w-100 d-flex justify-content-center">
-                                <a class="link-direction link-new-post d-flex align-items-center" href={{ route('user.posts.index') }}>
+                                <a class="link-direction link-new-post d-flex align-items-center" href={{ route('user.posts.create') }}>
                                     <i class="fas fa-cart-plus" aria-hidden="true"></i>
                                     <div class="left-info">
                                         <span class="title">new post</span>
@@ -179,22 +180,22 @@
                         <div class="container">
                             <ul class="nav primary clone-main-menu" id="mercado_main" data-menuname="Main menu" >
                                 <li class="menu-item home-icon">
-                                    <a href={{ route('home') }} class="link-term mercado-item-title"><i class="fa fa-home" aria-hidden="true"></i></a>
+                                    <a href="{{ route('home') }}" class="link-term mercado-item-title"><i class="fa fa-home" aria-hidden="true"></i></a>
                                 </li>
                                 <li class="menu-item">
-                                    <a href={{ route('user.about-us') }} class="link-term mercado-item-title">About Us</a>
+                                    <a href="{{ route('user.about-us') }}" class="link-term mercado-item-title">About Us</a>
                                 </li>
                                 <li class="menu-item">
-                                    <a href={{ route('user.shop') }} class="link-term mercado-item-title">Shop</a>
+                                    <a href="{{ route('user.shop') }}" class="link-term mercado-item-title">Shop</a>
                                 </li>
                                 <li class="menu-item">
-                                    <a href={{ route('user.cart') }} class="link-term mercado-item-title">Cart</a>
+                                    <a href="{{ route('user.cart') }}" class="link-term mercado-item-title">Cart</a>
                                 </li>
                                 <li class="menu-item">
-                                    <a href={{ route('user.checkout') }} class="link-term mercado-item-title">Checkout</a>
+                                    <a href="{{ route('user.checkout') }}" class="link-term mercado-item-title">Checkout</a>
                                 </li>
                                 <li class="menu-item">
-                                    <a href={{ route('user.contact-us') }} class="link-term mercado-item-title">Contact Us</a>
+                                    <a href="{{ route('user.contact-us') }}" class="link-term mercado-item-title">Contact Us</a>
                                 </li>
                             </ul>
                         </div>
