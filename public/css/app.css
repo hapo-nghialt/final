@@ -25932,3 +25932,10 @@ readers do not read off random characters that represent icons */
 .main-info-area .right-section .wrap-icon-section .link-new-post > i {
   color: #ffffff;
 }
+
+.personal-page .summary-checkout .summary-item {
+  width: 100%;
+}
+.personal-page .summary-checkout .summary-item h4 {
+  max-width: none;
+}

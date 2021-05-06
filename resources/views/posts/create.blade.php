@@ -13,14 +13,15 @@
     <div class=" main-content-area">
         <div class="wrap-address-billing">
             <h3 class="box-title">new post</h3>
-            <form action="{{ route('user.posts.create') }}" method="get" name="frm-billing">
+            <form action="{{ route('user.posts.store') }}" method="POST" name="frm-billing" enctype="multipart/form-data">
+                @csrf
                 <p class="row-in-form">
-                    <label for="fname">product name <span>(*)</span></label>
-                    <input id="fname" type="text" name="fname" value="" placeholder="Product name">
+                    <label for="title">product name <span>(*)</span></label>
+                    <input id="title" type="text" name="title" value="" placeholder="Product name">
                 </p>
                 <p class="row-in-form">
-                    <label for="lname">category <span>(*)</span></label>
-                    <select id="lname" name="lname" class="d-none">
+                    <label for="categories[]">category <span>(*)</span></label>
+                    <select id="categories[]" name="category" class="d-none">
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->title }}</option>
                         @endforeach
@@ -35,12 +36,16 @@
                     <input id="status" type="text" name="status" value="" placeholder="Like new">
                 </p>
                 <p class="row-in-form">
-                    <label for="description">Description</label>
-                    <textarea rows="8" id="description" name="description" placeholder="Description"></textarea>
-                </p>
-                <p class="row-in-form">
                     <label for="address">Address <span>(*)</span></label>
                     <input id="address" type="text" name="address" value="" placeholder="Address">
+                </p>
+                <p class="row-in-form">
+                    <label for="image">Image</label>
+                    <input type="file" name="image">
+                </p>
+                <p class="row-in-form">
+                    <label for="description">Description</label>
+                    <textarea rows="8" id="description" name="description" placeholder="Description"></textarea>
                 </p>
                 <div class="summary-item row-in-form w-100 d-flex">
                     <button type="submit" class="btn btn-medium mx-auto">Create</button>

@@ -69,9 +69,9 @@
                                     <a title="My Account" href="#">{{ Auth::user()->name }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                     <ul class="submenu curency">
                                         @if (Auth::user()->role_id == \App\Models\User::ROLE['admin'])
-                                            <li class="menu-item"><a href={{ route('admin.home') }}>Admin Page</a></li>
+                                            <li class="menu-item"><a href={{ route('admin.home') }}>admin page</a></li>
                                         @endif
-                                        <li class="menu-item"><a href={{ route('user.posts.index') }}>Posts</a></li>
+                                        <li class="menu-item"><a href={{ route('user.posts.index') }}>personal page</a></li>
                                         <li class="menu-item" ><a href="javascript:$('#logout-form').submit()">Logout</a></li>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf

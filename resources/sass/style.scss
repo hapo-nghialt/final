@@ -31,3 +31,14 @@
     }
   }
 }
+
+.personal-page {
+  .summary-checkout {
+    .summary-item {
+      width: 100%;
+      h4 {
+        max-width: none;
+      }
+    }
+  }
+}

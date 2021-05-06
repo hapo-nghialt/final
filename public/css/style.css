@@ -4870,6 +4870,7 @@ table.shop_attributes tbody{
 .wrap-address-billing .row-in-form input[type=email],
 .wrap-address-billing .row-in-form input[type=text],
 .wrap-address-billing .row-in-form input[type=number],
+.wrap-address-billing .row-in-form input[type=file],
 .wrap-address-billing .row-in-form textarea{
     font-size: 13px;
     line-height: 19px;
@@ -4881,8 +4882,6 @@ table.shop_attributes tbody{
 }
 .wrap-address-billing .row-in-form textarea{
   height: auto;
-}
-.wrap-address-billing .row-in-form textarea::placeholder{
   padding-top: 10px;
 }
 .wrap-address-billing .row-in-form input[type=email]::placeholder,
@@ -4890,7 +4889,7 @@ table.shop_attributes tbody{
 .wrap-address-billing .row-in-form input[type=tel]::placeholder{
     color: #aaaaaa;
 }
-.wrap-address-billing .row-in-form:nth-child(2n+1){
+.wrap-address-billing .row-in-form:nth-child(2n){
     margin-right: 30px;
 }
 .summary-checkout{

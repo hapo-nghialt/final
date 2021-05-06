@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -14,8 +16,9 @@ class PostController extends Controller
      */
     public function index()
     {
+        $posts = Post::where('user_id', Auth::user()->id)->get();
         $categories = Category::get();
-        return view('posts.index', compact('categories'));
+        return view('posts.index', compact('categories', 'posts'));
     }
 
     /**
@@ -37,7 +40,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        dd('12341233124');
+        Post::create([
+            'title' => $request->title,
+            'status' => $request->status,
+            'description' => $request->description,
+            'user_id' => Auth::user()->id,
+            'category_id' => $request->category,
+            'address' => $request->address,
+            'price' => $request->price,
+            'show_status' => 1,
+            'bought_status' => 0,
+        ]);
+
+        return redirect()->route('user.posts.index');
     }
 
     /**
