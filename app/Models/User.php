@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -46,4 +47,18 @@ class User extends Authenticatable
         'admin' => 0,
         'user' => 1,
     ];
+
+    public function posts() {
+        return $this->hasMany(Post::class);
+    }
+
+    public function getCreatedDateFormat()
+    {
+        $createdAt = Carbon::parse($this->created_at)->format('d-m-Y');
+        return $createdAt;
+    }
+
+    public function getNumberItemAttribute() {
+        return $this->posts()->count();
+    }
 }

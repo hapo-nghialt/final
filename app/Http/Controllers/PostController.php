@@ -17,8 +17,9 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::where('user_id', Auth::user()->id)->get();
+        $user = Auth::user();
         $categories = Category::get();
-        return view('posts.index', compact('categories', 'posts'));
+        return view('posts.index', compact('categories', 'posts', 'user'));
     }
 
     /**
@@ -40,10 +41,17 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $image = null;
+        if ($request->hasFile('image')) {
+            $image = uniqid() . "_" . $request->image->getClientOriginalName();
+            $request->file('image')->storeAs('public/posts', $image);
+        }
+//        dd($image);
         Post::create([
             'title' => $request->title,
             'status' => $request->status,
             'description' => $request->description,
+            'image' => $image,
             'user_id' => Auth::user()->id,
             'category_id' => $request->category,
             'address' => $request->address,

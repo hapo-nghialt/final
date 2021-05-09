@@ -1,68 +1,65 @@
 @extends('layouts.app')
-@section('title', 'Personal Page')
+@section('title', $user->name)
 @section('class-body', 'checkout page')
 @section('class-main', 'main-site')
 
 @section('content')
-    <div class="wrap-breadcrumb">
-        <ul>
-            <li class="item-link"><a href="#" class="link">home</a></li>
-            <li class="item-link"><span>personal page: {{ \Illuminate\Support\Facades\Auth::user()->name }}</span></li>
-        </ul>
-    </div>
     <div class="main-content-area">
         <div class="personal-page">
             <div class="summary summary-checkout">
-                <div class="summary-item payment-method">
-                    <h4 class="title-box">personal page</h4>
-                    <p class="summary-info"><span class="title">Check / Money order</span></p>
-                    <p class="summary-info"><span class="title">Credit Cart (saved)</span></p>
-                    <div class="choose-payment-methods">
-                        <label class="payment-method">
-                            <input name="payment-method" id="payment-method-bank" value="bank" type="radio">
-                            <span>Direct Bank Transder</span>
-                            <span class="payment-desc">But the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable</span>
-                        </label>
-                        <label class="payment-method">
-                            <input name="payment-method" id="payment-method-visa" value="visa" type="radio">
-                            <span>visa</span>
-                            <span class="payment-desc">There are many variations of passages of Lorem Ipsum available</span>
-                        </label>
-                        <label class="payment-method">
-                            <input name="payment-method" id="payment-method-paypal" value="paypal" type="radio">
-                            <span>Paypal</span>
-                            <span class="payment-desc">You can pay with your credit</span>
-                            <span class="payment-desc">card if you don't have a paypal account</span>
-                        </label>
+                <div class="summary-item">
+                    <div class="personal-card-background">
                     </div>
-                    <p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price">$100.00</span></p>
-                    <a href="thankyou.html" class="btn btn-medium">Place order now</a>
+                    <div class="personal-card row">
+                        <div class="avatar-shop col-4">
+                            <img src="https://cf.shopee.vn/file/b20844f9b90842765db827178a6fd62b_tn" alt="">
+                        </div>
+                        <div class="col-8">
+                            <p class="summary-info">
+                                <b class="index">{{ $user->name }}</b>
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="summary-item shipping-method">
-                    <h4 class="title-box f-title">Shipping method</h4>
-                    <p class="summary-info"><span class="title">Flat Rate</span></p>
-                    <p class="summary-info"><span class="title">Fixed $50.00</span></p>
-                    <h4 class="title-box">Discount Codes</h4>
-                    <p class="row-in-form">
-                        <label for="coupon-code">Enter Your Coupon code:</label>
-                        <input id="coupon-code" type="text" name="coupon-code" value="" placeholder="">
-                    </p>
-                    <a href="#" class="btn btn-small">Apply</a>
+                <div class="summary-item personal-items">
+                    <h4 class="title-box f-title">thông tin</h4>
+                    <div class="row">
+                        <p class="summary-info col-6">
+                            <span class="title">Sản phẩm: </span>
+                            <b class="index">{{ $user->number_item }}</b>
+                        </p>
+                        <p class="summary-info col-6">
+                            <span class="title">Email: </span>
+                            <b class="index">{{ $user->email }}</b>
+                        </p>
+                        <p class="summary-info col-6">
+                            <span class="title">Địa chỉ: </span>
+                            <b class="index">{{ $user->address }}</b>
+                        </p>
+                        <p class="summary-info col-6">
+                            <span class="title">Số điện thoại: </span>
+                            <b class="index">{{ $user->phone_number }}</b>
+                        </p>
+                        <p class="summary-info col-6">
+                            <span class="title">Tham gia: </span>
+                            <b class="index">{{ $user->getCreatedDateFormat() }}</b>
+                        </p>
+                    </div>
                 </div>
             </div>
-            <div class="summary summary-checkout">
+            <div class="personal-information summary summary-checkout">
                 <div class="summary-item payment-method">
                     <h4 class="title-box">my posts</h4>
                 </div>
-                <div class="row">
+                <div class="row post-list">
                     <ul class="product-list grid-products equal-container">
                         @foreach($posts as $post)
-                        <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
-                            <div class="product product-style-3 equal-elem ">
-                                <img src={{ asset('images/products/digital_20.jpg') }} alt="T-Shirt Raw Hem Organic Boro Constrast Denim">
+                        <li class="col-lg-2 col-md-6 col-sm-6 col-xs-6 p-0">
+                            <div class="product product-style-3">
+                                <img src="{{ asset('storage/posts/' . $post->image) }}" alt="{{ $post->title }}">
                                 <div class="product-info">
                                     <a href="#" class="product-name"><span>{{ $post->title }}</span></a>
-                                    <div class="wrap-price"><span class="product-price">{{ $post->price }} VND</span></div>
+                                    <div class="wrap-price"><span class="item-price">{{ number_format($post->price, 0) }} VND</span></div>
                                     <a href="#" class="btn add-to-cart">Add To Cart</a>
                                 </div>
                             </div>

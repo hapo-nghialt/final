@@ -17,7 +17,7 @@
                 @csrf
                 <p class="row-in-form">
                     <label for="title">product name <span>(*)</span></label>
-                    <input id="title" type="text" name="title" value="" placeholder="Product name">
+                    <input id="title" type="text" name="title" value="" placeholder="Product name" required>
                 </p>
                 <p class="row-in-form">
                     <label for="categories[]">category <span>(*)</span></label>
@@ -29,23 +29,23 @@
                 </p>
                 <p class="row-in-form">
                     <label for="price">Price <span>(*)</span></label>
-                    <input id="price" type="number" name="price" value="" placeholder="Price">
+                    <input id="price" type="number" name="price" value="" placeholder="Price" required>
                 </p>
                 <p class="row-in-form">
                     <label for="status">Status <span>(*)</span></label>
-                    <input id="status" type="text" name="status" value="" placeholder="Like new">
+                    <input id="status" type="text" name="status" value="" placeholder="Like new" required>
                 </p>
                 <p class="row-in-form">
                     <label for="address">Address <span>(*)</span></label>
-                    <input id="address" type="text" name="address" value="" placeholder="Address">
+                    <input id="address" type="text" name="address" value="" placeholder="Address" required>
                 </p>
                 <p class="row-in-form">
-                    <label for="image">Image</label>
-                    <input type="file" name="image">
+                    <label for="image">Image <span>(*)</span></label>
+                    <input type="file" name="image" required>
                 </p>
                 <p class="row-in-form">
-                    <label for="description">Description</label>
-                    <textarea rows="8" id="description" name="description" placeholder="Description"></textarea>
+                    <label for="description">Description <span>(*)</span></label>
+                    <textarea rows="8" id="description" name="description" placeholder="Description" required></textarea>
                 </p>
                 <div class="summary-item row-in-form w-100 d-flex">
                     <button type="submit" class="btn btn-medium mx-auto">Create</button>

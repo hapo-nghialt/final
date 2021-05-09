@@ -13,6 +13,7 @@ class Post extends Model
         'title',
         'status',
         'description',
+        'image',
         'user_id',
         'category_id',
         'show_status',
@@ -20,4 +21,8 @@ class Post extends Model
         'address',
         'price'
     ];
+
+    public function users() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

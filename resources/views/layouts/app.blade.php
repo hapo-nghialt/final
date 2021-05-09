@@ -35,7 +35,7 @@
                         <div class="topbar-menu left-menu">
                             <ul>
                                 <li class="menu-item" >
-                                    <a title="Hotline: (+123) 456 789" href="#" ><span class="icon label-before fa fa-mobile"></span>Hotline: (+123) 456 789</a>
+                                    <a title="Hotline: 0968.193.632" href="#" ><span class="icon label-before fa fa-mobile"></span>Hotline: 0968.193.632</a>
                                 </li>
                             </ul>
                         </div>
@@ -69,21 +69,21 @@
                                     <a title="My Account" href="#">{{ Auth::user()->name }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                     <ul class="submenu curency">
                                         @if (Auth::user()->role_id == \App\Models\User::ROLE['admin'])
-                                            <li class="menu-item"><a href={{ route('admin.home') }}>admin page</a></li>
+                                            <li class="menu-item"><a href={{ route('admin.home') }}>Trang admin</a></li>
                                         @endif
-                                        <li class="menu-item"><a href={{ route('user.posts.index') }}>personal page</a></li>
-                                        <li class="menu-item" ><a href="javascript:$('#logout-form').submit()">Logout</a></li>
+                                        <li class="menu-item"><a href={{ route('user.posts.index') }}>Trang cá nhân</a></li>
+                                        <li class="menu-item" ><a href="javascript:$('#logout-form').submit()">Đăng xuất</a></li>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf
                                             <button type="submit" hidden title="Logout">
-                                                Logout
+                                                Đăng xuất
                                             </button>
                                         </form>
                                     </ul>
                                 </li>
                                 @else
-                                <li class="menu-item" ><a title="Register or Login" href={{ route('login') }}>Login</a></li>
-                                <li class="menu-item" ><a title="Register or Login" href={{ route('register') }}>Register</a></li>
+                                <li class="menu-item" ><a title="Register or Login" href={{ route('login') }}>Đăng nhập</a></li>
+                                <li class="menu-item" ><a title="Register or Login" href={{ route('register') }}>Đăng ký</a></li>
                                 @endif
                             </ul>
                         </div>
@@ -94,9 +94,8 @@
                     <div class="mid-section main-info-area">
 
                         <div class="wrap-logo-top left-section">
-                            <a href={{ route('home') }} class="link-to-home"><img src={{ asset('images/logo-top-1.png') }} alt="mercado"></a>
+                            <a href={{ route('home') }} class="link-to-home"><img src="{{ asset('images/logo-top-1.png') }}" alt="mercado"></a>
                         </div>
-
                         <div class="wrap-search center-section">
                             <div class="wrap-search-form">
                                 <form action="#" id="form-search-top" name="form-search-top">

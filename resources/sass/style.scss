@@ -33,12 +33,66 @@
 }
 
 .personal-page {
-  .summary-checkout {
+  .personal-information {
     .summary-item {
       width: 100%;
       h4 {
         max-width: none;
       }
     }
+  }
+  .personal-card-background {
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://thumbor.autonomous.ai/Dg4iDuGV9BfV2h8gk0uFicHVDF8=/1600x900/filters:quality(100)/https://cdn.autonomous.ai/static/upload/images/new_post/our-definitive-minimalist-desk-setup-guide-488-1595822218670.jpg');
+    filter: blur(2px);
+    position: absolute;
+    width: 440px;
+    height: 180px;
+    background-size: cover;
+  }
+  .personal-card {
+    padding: 40px;
+    .index {
+      color: #ffffff !important;
+      font-size: 23px;
+    }
+    .avatar-shop {
+      img {
+        border: 4px solid rgb(255, 255, 255, 0.4);
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+.summary-checkout .summary-item {
+  display: block;
+  float: left;
+  width: 50%;
+}
+
+.summary-checkout .summary-item.personal-items {
+  padding-left: 15px;
+  .index {
+    color: #333333;
+    font-weight: 700;
+  }
+}
+
+.post-list .product-list {
+  width: 100%;
+  li {
+    .product.product-style-3 {
+      display: block;
+      margin-top: 0;
+      img {
+        height: 130px;
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+  .item-price {
+    font-weight: 700;
+    color: #ee4d2d;
   }
 }
