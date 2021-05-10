@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class PostController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,8 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::get();
-        return view('posts.create', compact('categories'));
+        //
     }
 
     /**
@@ -38,26 +37,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $image = null;
-        if ($request->hasFile('image')) {
-            $image = uniqid() . "_" . $request->image->getClientOriginalName();
-            $request->file('image')->storeAs('public/posts', $image);
-        }
-//        dd($image);
-        Post::create([
-            'title' => $request->title,
-            'status' => $request->status,
-            'description' => $request->description,
-            'image' => $image,
-            'user_id' => Auth::user()->id,
-            'category_id' => $request->category,
-            'address' => $request->address,
-            'price' => $request->price,
-            'show_status' => 1,
-            'bought_status' => 0,
-        ]);
-
-        return redirect()->route('user.posts.index');
+        //
     }
 
     /**
@@ -68,7 +48,10 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $posts = Post::where('user_id', $id)->get();
+        $user = User::findOrFail($id);
+        $categories = Category::get();
+        return view('users.show', compact('categories', 'posts', 'user'));
     }
 
     /**

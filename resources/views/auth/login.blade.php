@@ -6,8 +6,8 @@
 @section('content')
     <div class="wrap-breadcrumb">
         <ul>
-            <li class="item-link"><a href="#" class="link">home</a></li>
-            <li class="item-link"><span>login</span></li>
+            <li class="item-link"><a href="{{ route('home') }}" class="link">home</a></li>
+            <li class="item-link"><span>đăng nhập</span></li>
         </ul>
     </div>
     <div class="row">
@@ -18,10 +18,10 @@
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <fieldset class="wrap-title">
-                                <h3 class="form-title">login</h3>
+                                <h3 class="form-title">đăng nhập</h3>
                             </fieldset>
                             <fieldset class="wrap-input login-input">
-                                <input type="text" id="frm-login-uname" name="username" placeholder="Username" value="{{ old('username') }}">
+                                <input type="text" id="frm-login-uname" name="username" placeholder="Tên đăng nhập" value="{{ old('username') }}">
                                 @if ($errors->has('username'))
                                     <span class="invalid-feedback d-inline-block" role="alert">
                                     <strong>{{ $errors->first('username') }}</strong>
@@ -29,7 +29,7 @@
                                 @endif
                             </fieldset>
                             <fieldset class="wrap-input login-input">
-                                <input type="password" id="frm-login-pass" name="password" placeholder="Password">
+                                <input type="password" id="frm-login-pass" name="password" placeholder="Mật khẩu">
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback d-inline-block" role="alert">
                                     <strong>{{ $errors->first('password') }}</strong>
@@ -38,11 +38,11 @@
                             </fieldset>
                             <fieldset class="wrap-input">
                                 <label class="remember-field">
-                                    <input class="frm-input " name="rememberme" id="rememberme" value="forever" type="checkbox"><span>Remember me</span>
+                                    <input class="frm-input " name="rememberme" id="rememberme" value="forever" type="checkbox"><span>Ghi nhớ đăng nhập</span>
                                 </label>
-                                <a class="link-function left-position" href="#" title="Forgotten password?">Forgotten password?</a>
+                                <a class="link-function left-position" href="#" title="Forgotten password?">Quên mật khẩu?</a>
                             </fieldset>
-                            <input type="submit" class="btn btn-submit" value="Login" name="submit">
+                            <input type="submit" class="btn btn-submit" value="Đăng nhập" name="submit">
                         </form>
                     </div>
                 </div>

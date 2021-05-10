@@ -71,7 +71,7 @@
                                         @if (Auth::user()->role_id == \App\Models\User::ROLE['admin'])
                                             <li class="menu-item"><a href={{ route('admin.home') }}>Trang admin</a></li>
                                         @endif
-                                        <li class="menu-item"><a href={{ route('user.posts.index') }}>Trang cá nhân</a></li>
+                                        <li class="menu-item"><a href={{ route('users.show', Auth::user()->id) }}>Trang cá nhân</a></li>
                                         <li class="menu-item" ><a href="javascript:$('#logout-form').submit()">Đăng xuất</a></li>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf

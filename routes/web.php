@@ -28,6 +28,8 @@ Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => 'auth.user'],
     Route::resource('posts', App\Http\Controllers\PostController::class);
 });
 
+Route::resource('users', \App\Http\Controllers\UserController::class );
+
 Route::get('/detail', function () {
     return view('ecommerce.detail');
 });
