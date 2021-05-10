@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'New Post')
+@section('title', 'Đăng bài viết mới')
 @section('class-body', 'checkout page')
 @section('class-main', 'main-site')
 
@@ -13,7 +13,7 @@
     <div class=" main-content-area">
         <div class="wrap-address-billing">
             <h3 class="box-title">new post</h3>
-            <form action="{{ route('user.posts.store') }}" method="POST" name="frm-billing" enctype="multipart/form-data">
+            <form action="{{ route('user.products.store') }}" method="POST" name="frm-billing" enctype="multipart/form-data">
                 @csrf
                 <p class="row-in-form">
                     <label for="title">product name <span>(*)</span></label>

@@ -4,9 +4,15 @@
 @section('class-main', 'main-site')
 
 @section('content')
+    <div class="wrap-breadcrumb">
+        <ul class="mb-0">
+            <li class="item-link"><a href="{{ route('home') }}" class="link">trang chủ</a></li>
+            <li class="item-link"><span>trang cá nhân</span></li>
+        </ul>
+    </div>
     <div class="main-content-area">
         <div class="personal-page">
-            <div class="summary summary-checkout">
+            <div class="personal-card-info">
                 <div class="summary-item">
                     <div class="personal-card-background">
                     </div>
@@ -47,20 +53,19 @@
                     </div>
                 </div>
             </div>
-            <div class="personal-information summary summary-checkout">
+            <div class="personal-information summary">
                 <div class="summary-item payment-method">
-                    <h4 class="title-box">my posts</h4>
+                    <h4 class="title-box">danh sách sản phẩm</h4>
                 </div>
-                <div class="row post-list">
+                <div class="row post-list mx-0">
                     <ul class="product-list grid-products equal-container">
                         @foreach($posts as $post)
                         <li class="col-lg-2 col-md-6 col-sm-6 col-xs-6 p-0">
                             <div class="product product-style-3">
-                                <img src="{{ asset('storage/posts/' . $post->image) }}" alt="{{ $post->title }}">
+                                <img src="{{ asset('storage/products/' . $post->image) }}" alt="{{ $post->title }}">
                                 <div class="product-info">
                                     <a href="#" class="product-name"><span>{{ $post->title }}</span></a>
                                     <div class="wrap-price"><span class="item-price">{{ number_format($post->price, 0) }} VND</span></div>
-                                    <a href="#" class="btn add-to-cart">Add To Cart</a>
                                 </div>
                             </div>
                         </li>

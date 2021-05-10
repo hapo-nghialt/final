@@ -7,7 +7,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PostController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::get();
-        return view('posts.create', compact('categories'));
+        return view('products.create', compact('categories'));
     }
 
     /**
@@ -41,7 +41,7 @@ class PostController extends Controller
         $image = null;
         if ($request->hasFile('image')) {
             $image = uniqid() . "_" . $request->image->getClientOriginalName();
-            $request->file('image')->storeAs('public/posts', $image);
+            $request->file('image')->storeAs('public/products', $image);
         }
 //        dd($image);
         Post::create([
@@ -57,7 +57,7 @@ class PostController extends Controller
             'bought_status' => 0,
         ]);
 
-        return redirect()->route('user.posts.index');
+        return redirect()->route('users.show', Auth::user()->id);
     }
 
     /**

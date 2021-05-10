@@ -25,10 +25,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth.admin
 });
 
 Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => 'auth.user'], function() {
-    Route::resource('posts', App\Http\Controllers\PostController::class);
+    Route::resource('products', App\Http\Controllers\ProductController::class);
 });
 
-Route::resource('users', \App\Http\Controllers\UserController::class );
+Route::resource('users', App\Http\Controllers\UserController::class);
 
 Route::get('/detail', function () {
     return view('ecommerce.detail');

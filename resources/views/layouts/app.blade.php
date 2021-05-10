@@ -149,10 +149,11 @@
                             </div>
                             @if(Auth::check())
                             <div class="wrap-icon-section w-100 d-flex justify-content-center">
-                                <a class="link-direction link-new-post d-flex align-items-center" href={{ route('user.posts.create') }}>
+                                <a class="link-direction link-new-post d-flex align-items-center"
+                                   href={{ route('user.products.create') }}>
                                     <i class="fas fa-cart-plus" aria-hidden="true"></i>
                                     <div class="left-info">
-                                        <span class="title">new post</span>
+                                        <span class="title">đăng bài</span>
                                     </div>
                                 </a>
                             </div>

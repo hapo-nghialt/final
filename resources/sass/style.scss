@@ -1,3 +1,7 @@
+body {
+  background-color: #f5f5f5;
+}
+
 .login-input {
   margin: 20px 0;
 }
@@ -32,10 +36,21 @@
   }
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .personal-page {
+  .personal-card-info {
+    width: 100%;
+    padding: 29px 29px 30px 29px;
+    display: flex;
+    margin-top: 14px;
+  }
   .personal-information {
     .summary-item {
-      width: 100%;
       h4 {
         max-width: none;
       }
@@ -70,8 +85,14 @@
   width: 50%;
 }
 
-.summary-checkout .summary-item.personal-items {
+.personal-card-info .summary-item.personal-items {
   padding-left: 15px;
+  .title {
+    font-size: 14px;
+    color: #555555;
+    line-height: 24px;
+    margin: 0;
+  }
   .index {
     color: #333333;
     font-weight: 700;
@@ -81,6 +102,10 @@
 .post-list .product-list {
   width: 100%;
   li {
+    background-color: white;
+    padding: 4px;
+    margin: 4px;
+    box-shadow: 0 0.0625rem 0.125rem 0 rgb(0 0 0 / 10%);
     .product.product-style-3 {
       display: block;
       margin-top: 0;
