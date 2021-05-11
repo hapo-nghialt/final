@@ -150,7 +150,7 @@
                             @if(Auth::check())
                             <div class="wrap-icon-section w-100 d-flex justify-content-center">
                                 <a class="link-direction link-new-post d-flex align-items-center"
-                                   href={{ route('user.products.create') }}>
+                                   href={{ route('products.create') }}>
                                     <i class="fas fa-cart-plus" aria-hidden="true"></i>
                                     <div class="left-info">
                                         <span class="title">đăng bài</span>
@@ -472,5 +472,6 @@
     <script src={{ asset('js/jquery.countdown.min.js') }}></script>
     <script src={{ asset('js/jquery.sticky.js') }}></script>
     <script src={{ asset('js/functions.js') }}></script>
+    <script src={{ asset('js/app.js') }}></script>
 </body>
 </html>

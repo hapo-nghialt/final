@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Product extends Model
 {
     use HasFactory;
 
@@ -14,6 +14,11 @@ class Post extends Model
         'status',
         'description',
         'image',
+        'image-1',
+        'image-2',
+        'image-3',
+        'image-4',
+        'image-5',
         'user_id',
         'category_id',
         'show_status',

@@ -6,47 +6,64 @@
 @section('content')
     <div class="wrap-breadcrumb">
         <ul>
-            <li class="item-link"><a href="#" class="link">home</a></li>
-            <li class="item-link"><span>login</span></li>
+            <li class="item-link"><a href="{{ route('home') }}" class="link">trang chủ</a></li>
+            <li class="item-link"><span>đăng bài</span></li>
         </ul>
     </div>
     <div class=" main-content-area">
-        <div class="wrap-address-billing">
-            <h3 class="box-title">new post</h3>
-            <form action="{{ route('user.products.store') }}" method="POST" name="frm-billing" enctype="multipart/form-data">
+        <label class="wrap-address-billing create-product-form">
+            <h3 class="box-title">bài viết mới</h3>
+            <form action="{{ route('products.store') }}" method="POST" name="frm-billing" enctype="multipart/form-data">
                 @csrf
-                <p class="row-in-form">
-                    <label for="title">product name <span>(*)</span></label>
-                    <input id="title" type="text" name="title" value="" placeholder="Product name" required>
-                </p>
-                <p class="row-in-form">
-                    <label for="categories[]">category <span>(*)</span></label>
+                <div class="row-in-form">
+                    <label for="title">tên sản phẩm <span>(*)</span></label>
+                    <input id="title" type="text" name="title" value="" placeholder="Nhập tên sản phẩm" required>
+                </div>
+                <div class="row-in-form">
+                    <label for="categories[]">thể loại <span>(*)</span></label>
                     <select id="categories[]" name="category" class="d-none">
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->title }}</option>
                         @endforeach
                     </select>
-                </p>
-                <p class="row-in-form">
-                    <label for="price">Price <span>(*)</span></label>
-                    <input id="price" type="number" name="price" value="" placeholder="Price" required>
-                </p>
-                <p class="row-in-form">
-                    <label for="status">Status <span>(*)</span></label>
-                    <input id="status" type="text" name="status" value="" placeholder="Like new" required>
-                </p>
-                <p class="row-in-form">
-                    <label for="address">Address <span>(*)</span></label>
-                    <input id="address" type="text" name="address" value="" placeholder="Address" required>
-                </p>
-                <p class="row-in-form">
-                    <label for="image">Image <span>(*)</span></label>
-                    <input type="file" name="image" required>
-                </p>
-                <p class="row-in-form">
+                </div>
+                <div class="row-in-form">
+                    <label for="price">giá (VNĐ) <span>(*)</span></label>
+                    <input id="price" type="number" name="price" value="" placeholder="Nhập giá sản phẩm" required>
+                </div>
+                <div class="row-in-form">
+                    <label for="status">tình trạng <span>(*)</span></label>
+                    <input id="status" type="text" name="status" value="" placeholder="Ví dụ: Like new" required>
+                </div>
+                <div class="row-in-form">
+                    <label for="address">địa chỉ <span>(*)</span></label>
+                    <input id="address" type="text" name="address" value="" placeholder="Nhập địa chỉ bán sản phẩm" required>
+                </div>
+                <div class="row-in-form">
+                    <label>ảnh chính <span>*</span></label>
+                    <label for="imageProduct" class="label-image" style="max-width: 12%">
+                        <span class="fas fa-images"></span>
+                    </label>
+                    <input type="file" name="image" id="imageProduct" class="input-image">
+                    <img src="#" alt="" style="width: 70px" id="previewProductImage">
+                </div>
+                <div class="row-in-form">
                     <label for="description">Description <span>(*)</span></label>
                     <textarea rows="8" id="description" name="description" placeholder="Description" required></textarea>
-                </p>
+                </div>
+                <div class="row-in-form">
+                    <label>ảnh phụ <span>(Tải lên ít nhất 2 ảnh)</span></label>
+                    <div class="row">
+                        @for ($i=1; $i<=6; $i++)
+                            <div class="col-2">
+                                <label for="image_{{ $i }}" class="label-image">
+                                    <span class="fas fa-images"></span>
+                                </label>
+                                <input type="file" name="image_{{ $i }}" id="image_{{ $i }}" class="input-image">
+                            </div>
+                        @endfor
+                    </div>
+                </div>
                 <div class="summary-item row-in-form w-100 d-flex">
                     <button type="submit" class="btn btn-medium mx-auto">Create</button>
                 </div>

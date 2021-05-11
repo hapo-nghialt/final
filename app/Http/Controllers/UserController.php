@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Post;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -48,7 +48,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $posts = Post::where('user_id', $id)->get();
+        $posts = Product::where('user_id', $id)->get();
         $user = User::findOrFail($id);
         $categories = Category::get();
         return view('users.show', compact('categories', 'posts', 'user'));

@@ -48,8 +48,8 @@ class User extends Authenticatable
         'user' => 1,
     ];
 
-    public function posts() {
-        return $this->hasMany(Post::class);
+    public function products() {
+        return $this->hasMany(Product::class);
     }
 
     public function getCreatedDateFormat()
@@ -59,6 +59,6 @@ class User extends Authenticatable
     }
 
     public function getNumberItemAttribute() {
-        return $this->posts()->count();
+        return $this->products()->count();
     }
 }

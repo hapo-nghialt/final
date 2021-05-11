@@ -3,39 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Post;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth.user')->only('create', 'store');
+    }
+
     public function index()
     {
         //
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $categories = Category::get();
         return view('products.create', compact('categories'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $image = null;
@@ -43,12 +30,30 @@ class ProductController extends Controller
             $image = uniqid() . "_" . $request->image->getClientOriginalName();
             $request->file('image')->storeAs('public/products', $image);
         }
-//        dd($image);
-        Post::create([
+        $nameImageArray = [];
+        for ($i=1; $i<=6; $i++) {
+            if ($request->hasFile('image_' . $i)) {
+                $nameImage = 'image_' . $i;
+                $nameImage = uniqid() . "_" . $request->$nameImage->getClientOriginalName();
+                array_push($nameImageArray, $nameImage);
+                $request->file('image_' . $i)->storeAs('public/products', $nameImage);
+            }
+        }
+        for ($i=1; $i<=6; $i++) {
+            array_push($nameImageArray, null);
+        }
+        $nameImageArray = array_slice($nameImageArray, 0, 6);
+        Product::create([
             'title' => $request->title,
             'status' => $request->status,
             'description' => $request->description,
             'image' => $image,
+            'image-1' => $nameImageArray[0],
+            'image-2' => $nameImageArray[1],
+            'image-3' => $nameImageArray[2],
+            'image-4' => $nameImageArray[3],
+            'image-5' => $nameImageArray[4],
+            'image-6' => $nameImageArray[5],
             'user_id' => Auth::user()->id,
             'category_id' => $request->category,
             'address' => $request->address,
@@ -59,47 +64,18 @@ class ProductController extends Controller
 
         return redirect()->route('users.show', Auth::user()->id);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

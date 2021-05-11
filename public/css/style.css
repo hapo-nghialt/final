@@ -622,13 +622,6 @@ header.fill-color .main-info-area .right-section .wrap-icon-section.minicart .in
 header.fill-color .main-info-area .right-section .wrap-icon-section .link-direction>i{
     color: #ffffff;
 }
-.main-info-area .right-section .wrap-icon-section .link-direction>i{
-    display: block;
-    float: left;
-    font-size: 25px;
-    color: #aaa;
-    margin: 7px 8px 0 0;
-}
 .main-info-area .right-section .wrap-icon-section .left-info{
 	display: block;
 	float: left;
@@ -646,10 +639,6 @@ header.fill-color .main-info-area .right-section .wrap-icon-section .link-direct
 	display: block;
 	padding: 0;
 	margin: 0; 
-}
-.header-nav-section .menu-nav li{
-	display: inline-block;
-	float: left;
 }
 .header-nav-section li>a{
 	display: inline-block;
@@ -4823,13 +4812,6 @@ table.shop_attributes tbody{
     width: 100%;
     margin-right: 0px !important; 
 }
-.wrap-address-billing .row-in-form label{
-    font-size: 14px;
-    line-height: 19px;
-    color: #555555;
-    display: block;
-    font-weight: 400;
-}
 .wrap-address-billing .row-in-form label.checkbox-field{
     display: inline-block;
     margin-bottom: 0;
@@ -4854,10 +4836,13 @@ table.shop_attributes tbody{
     padding: 2px 20px;
     width: 100%;
     border: 1px solid #e6e6e6;
+    font-weight: normal;
 }
 .wrap-address-billing .row-in-form input[type=email]::placeholder,
 .wrap-address-billing .row-in-form input[type=text]::placeholder,
-.wrap-address-billing .row-in-form input[type=tel]::placeholder{
+.wrap-address-billing .row-in-form input[type=tel]::placeholder,
+.wrap-address-billing .row-in-form input[type=number]::placeholder,
+.wrap-address-billing .row-in-form textarea::placeholder{
     color: #aaaaaa;
 }
 .wrap-address-billing .row-in-form:nth-child(2n+1){
