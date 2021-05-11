@@ -39,13 +39,13 @@
                     <label for="address">địa chỉ <span>(*)</span></label>
                     <input id="address" type="text" name="address" value="" placeholder="Nhập địa chỉ bán sản phẩm" required>
                 </div>
-                <div class="row-in-form">
+                <div class="row-in-form" style="display: grid;">
                     <label>ảnh chính <span>*</span></label>
-                    <label for="imageProduct" class="label-image" style="max-width: 12%">
+                    <label for="imageProduct" class="label-image image-product">
                         <span class="fas fa-images"></span>
                     </label>
                     <input type="file" name="image" id="imageProduct" class="input-image">
-                    <img src="#" alt="" style="width: 70px" id="previewProductImage">
+                    <img src="#" alt="" class="preview-image" id="previewProductImage">
                 </div>
                 <div class="row-in-form">
                     <label for="description">Description <span>(*)</span></label>
@@ -55,11 +55,12 @@
                     <label>ảnh phụ <span>(Tải lên ít nhất 2 ảnh)</span></label>
                     <div class="row">
                         @for ($i=1; $i<=6; $i++)
-                            <div class="col-2">
+                            <div class="col-4">
                                 <label for="image_{{ $i }}" class="label-image">
                                     <span class="fas fa-images"></span>
                                 </label>
                                 <input type="file" name="image_{{ $i }}" id="image_{{ $i }}" class="input-image">
+                                <img src="#" alt="" class="preview-image" id="previewImage{{ $i }}">
                             </div>
                         @endfor
                     </div>

@@ -185,6 +185,8 @@ input::-webkit-inner-spin-button {
     }
     .input-image {
       opacity: 0;
+      width: 0;
+      height: 0;
     }
     .label-image {
       border: 1px solid #ee4d2d;
@@ -196,6 +198,11 @@ input::-webkit-inner-spin-button {
         font-size: 36px;
         font-weight: 100;
       }
+    }
+    .image-product,
+    .preview-image {
+      width: 29.5%;
+      justify-self: center;
     }
   }
 }

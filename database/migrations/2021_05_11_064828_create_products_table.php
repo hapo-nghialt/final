@@ -19,12 +19,12 @@ class CreateProductsTable extends Migration
             $table->text('status');
             $table->text('description');
             $table->string('image')->nullable();
-            $table->string('image-1')->nullable();
-            $table->string('image-2')->nullable();
-            $table->string('image-3')->nullable();
-            $table->string('image-4')->nullable();
-            $table->string('image-5')->nullable();
-            $table->string('image-6')->nullable();
+            $table->string('image_1')->nullable();
+            $table->string('image_2')->nullable();
+            $table->string('image_3')->nullable();
+            $table->string('image_4')->nullable();
+            $table->string('image_5')->nullable();
+            $table->string('image_6')->nullable();
             $table->integer('user_id');
             $table->integer('category_id');
             $table->tinyInteger('show_status');

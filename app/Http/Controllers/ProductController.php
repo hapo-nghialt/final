@@ -42,18 +42,17 @@ class ProductController extends Controller
         for ($i=1; $i<=6; $i++) {
             array_push($nameImageArray, null);
         }
-        $nameImageArray = array_slice($nameImageArray, 0, 6);
         Product::create([
             'title' => $request->title,
             'status' => $request->status,
             'description' => $request->description,
             'image' => $image,
-            'image-1' => $nameImageArray[0],
-            'image-2' => $nameImageArray[1],
-            'image-3' => $nameImageArray[2],
-            'image-4' => $nameImageArray[3],
-            'image-5' => $nameImageArray[4],
-            'image-6' => $nameImageArray[5],
+            'image_1' => $nameImageArray[0],
+            'image_2' => $nameImageArray[1],
+            'image_3' => $nameImageArray[2],
+            'image_4' => $nameImageArray[3],
+            'image_5' => $nameImageArray[4],
+            'image_6' => $nameImageArray[5],
             'user_id' => Auth::user()->id,
             'category_id' => $request->category,
             'address' => $request->address,
