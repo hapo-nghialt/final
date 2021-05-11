@@ -11,5 +11,5 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-public/css
+public/css/app.css
 public/js/app.js
