@@ -52,15 +52,22 @@
                     <textarea rows="8" id="description" name="description" placeholder="Description" required></textarea>
                 </div>
                 <div class="row-in-form">
-                    <label>ảnh phụ <span>(Tải lên ít nhất 2 ảnh)</span></label>
+                    <label>ảnh phụ <span>(Tối đa 6 ảnh)</span></label>
                     <div class="row">
-                        @for ($i=1; $i<=6; $i++)
+                        <div class="col-4">
+                            <label for="image_1" class="label-image">
+                                <span class="fas fa-images"></span>
+                            </label>
+                            <input type="file" value="null" name="subImages[]" id="image_1" class="input-image">
+                            <img src="#" alt="" class="preview-image" id="previewSubImage1">
+                        </div>
+                        @for ($i=2; $i<=6; $i++)
                             <div class="col-4">
                                 <label for="image_{{ $i }}" class="label-image">
                                     <span class="fas fa-images"></span>
                                 </label>
-                                <input type="file" name="image_{{ $i }}" id="image_{{ $i }}" class="input-image">
-                                <img src="#" alt="" class="preview-image" id="previewImage{{ $i }}">
+                                <input type="file" value="null" name="subImages[]" id="image_{{ $i }}" class="input-image">
+                                <img src="#" alt="" class="preview-image" id="previewSubImage{{ $i }}">
                             </div>
                         @endfor
                     </div>

@@ -30,17 +30,10 @@ class ProductController extends Controller
             $image = uniqid() . "_" . $request->image->getClientOriginalName();
             $request->file('image')->storeAs('public/products', $image);
         }
-        $nameImageArray = [];
-        for ($i=1; $i<=6; $i++) {
-            if ($request->hasFile('image_' . $i)) {
-                $nameImage = 'image_' . $i;
-                $nameImage = uniqid() . "_" . $request->$nameImage->getClientOriginalName();
-                array_push($nameImageArray, $nameImage);
-                $request->file('image_' . $i)->storeAs('public/products', $nameImage);
-            }
-        }
-        for ($i=1; $i<=6; $i++) {
-            array_push($nameImageArray, null);
+        $subImages = $request->subImages;
+        foreach ($subImages as $key => $image) {
+            $subImage = uniqid() . "_" . $image->getClientOriginalName();
+            $image->storeAs('public/products', $subImage);
         }
         Product::create([
             'title' => $request->title,
