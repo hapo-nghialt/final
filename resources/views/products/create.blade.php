@@ -55,18 +55,18 @@
                     <label>ảnh phụ <span>(Tối đa 6 ảnh)</span></label>
                     <div class="row">
                         <div class="col-4">
-                            <label for="image_1" class="label-image">
+                            <label for="image_1" class="label-image" id="labelImage1">
                                 <span class="fas fa-images"></span>
                             </label>
-                            <input type="file" value="null" name="subImages[]" id="image_1" class="input-image">
+                            <input type="file" name="subImages[]" id="image_1" class="input-image">
                             <img src="#" alt="" class="preview-image" id="previewSubImage1">
                         </div>
                         @for ($i=2; $i<=6; $i++)
                             <div class="col-4">
-                                <label for="image_{{ $i }}" class="label-image">
+                                <label for="image_{{ $i }}" class="label-image d-none" id="labelImage{{ $i }}">
                                     <span class="fas fa-images"></span>
                                 </label>
-                                <input type="file" value="null" name="subImages[]" id="image_{{ $i }}" class="input-image">
+                                <input type="file" name="subImages[]" id="image_{{ $i }}" class="input-image">
                                 <img src="#" alt="" class="preview-image" id="previewSubImage{{ $i }}">
                             </div>
                         @endfor
