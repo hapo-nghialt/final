@@ -19,12 +19,11 @@
 .post-footer .post-tags ul li,
 .wrap-iten-in-cart .products-cart .product-name a:hover,
 .summary .checkout-info .link-to-shop:hover,
-.wrap-product-detail .detail-info .quantity-input input,
 .widget-our-services .service a>i,
 .product-style-1 .product-info .wrap-btn a,
 .wrap-breadcrumb ul a:hover,
 .center-section .wrap-search-form .wrap-list-cate .list-cate li:not(.level-0):hover{
-	color: #ff2832;
+	color: #edb9b4;
 }
 
 .widget a:hover,
@@ -67,12 +66,13 @@
 .post-footer .comment-form fieldset.input-field input[type=submit],
 .wrap-product-detail .advance-info .tab-control a.active,
 #review_form_wrapper #review_form .comment-form p.form-submit input[type=submit],
-.wrap-product-detail .detail-info .wrap-butons .add-to-cart:hover,
-.wrap-product-detail .detail-info .quantity-input .btn:hover,
 .summary-item .btn,
 .choose-payment-methods .payment-method input[type=radio]:checked + span::before,
 .main-info-area .right-section .wrap-icon-section.minicart .index{
-	background: #ff2832;
+	background: #ee4d2d;
+}
+.wrap-product-detail .detail-info .wrap-buttons .add-to-cart:hover{
+	background-color: rgba(255,87,34,.15);
 }
 .has-child-cate .toggle-control:hover::after,
 .has-child-cate .toggle-control:hover::before,
@@ -85,8 +85,7 @@
 }
 .flex-control-thumbs img.flex-active,
 .wrap-product-detail .advance-info .tab-control a.active,
-.wrap-product-detail .detail-info .quantity-input .btn:hover,
-.wrap-product-detail .detail-info .wrap-butons .add-to-cart:hover,
+.wrap-product-detail .detail-info .wrap-buttons .add-to-cart:hover,
 .product-widget-style .thumbnnail a:hover img,
 .choose-payment-methods .payment-method input[type=radio]:checked + span::before,
 .wrap-demo-item-1:hover img,

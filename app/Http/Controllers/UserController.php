@@ -48,10 +48,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $posts = Product::where('user_id', $id)->get();
+        $products = Product::where('user_id', $id)->get();
         $user = User::findOrFail($id);
         $categories = Category::get();
-        return view('users.show', compact('categories', 'posts', 'user'));
+        return view('users.show', compact('categories', 'products', 'user'));
     }
 
     /**

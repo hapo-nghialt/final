@@ -5,10 +5,11 @@
 
 @section('content')
     <div class="wrap-breadcrumb">
-        <ul class="mb-0">
-            <li class="item-link"><a href="{{ route('home') }}" class="link">trang chủ</a></li>
-            <li class="item-link"><span>trang cá nhân</span></li>
-        </ul>
+        <div>
+            <a href="#" class="link">Shopee</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>{{ $user->name }}</span>
+        </div>
     </div>
     <div class="main-content-area">
         <div class="personal-page">
@@ -59,16 +60,18 @@
                 </div>
                 <div class="row post-list mx-0">
                     <ul class="product-list grid-products equal-container">
-                        @foreach($posts as $post)
-                        <li class="col-lg-2 col-md-6 col-sm-6 col-xs-6 p-0">
-                            <div class="product product-style-3">
-                                <img src="{{ asset('storage/products/' . $post->image) }}" alt="{{ $post->title }}">
-                                <div class="product-info">
-                                    <a href="#" class="product-name"><span>{{ $post->title }}</span></a>
-                                    <div class="wrap-price"><span class="item-price">{{ number_format($post->price, 0) }} VND</span></div>
-                                </div>
-                            </div>
-                        </li>
+                        @foreach($products as $product)
+                            <li class="col-lg-2 col-md-6 col-sm-6 col-xs-6 p-0">
+                                <a href="{{ route('products.show', $product->id) }}">
+                                    <div class="product product-style-3">
+                                        <img src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->title }}">
+                                        <div class="product-info">
+                                            <a href="#" class="product-name"><span>{{ $product->title }}</span></a>
+                                            <div class="wrap-price"><span class="item-price"><span class="currency">₫</span>{{ number_format($product->price, 0) }}</span></div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
                         @endforeach
                     </ul>
                 </div>

@@ -14,4 +14,8 @@ class Category extends Model
         'description',
         'item_count'
     ];
+
+    public function products() {
+        return $this->hasMany(Product::class, 'category_id');
+    }
 }

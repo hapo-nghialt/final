@@ -25,27 +25,33 @@ class ProductController extends Controller
     }
     public function store(Request $request)
     {
-        $image = null;
+        $mainImage = null;
         if ($request->hasFile('image')) {
-            $image = uniqid() . "_" . $request->image->getClientOriginalName();
-            $request->file('image')->storeAs('public/products', $image);
+            $mainImage = uniqid() . "_" . $request->image->getClientOriginalName();
+            $request->file('image')->storeAs('public/products', $mainImage);
         }
+        dd(htmlentities($request->description));
         $subImages = $request->subImages;
+        $subImagesName = [];
         foreach ($subImages as $key => $image) {
             $subImage = uniqid() . "_" . $image->getClientOriginalName();
+            array_push($subImagesName, $subImage);
             $image->storeAs('public/products', $subImage);
+        }
+        for ($i=1; $i<=6; $i++) {
+            array_push($subImagesName, null);
         }
         Product::create([
             'title' => $request->title,
-            'status' => $request->status,
-            'description' => $request->description,
-            'image' => $image,
-            'image_1' => $subImage[1] ? $subImage[1] : '',
-            'image_2' => $subImage[2] ? $subImage[2] : '',
-            'image_3' => $subImage[3] ? $subImage[3] : '',
-            'image_4' => $subImage[4] ? $subImage[4] : '',
-            'image_5' => $subImage[5] ? $subImage[5] : '',
-            'image_6' => $subImage[6] ? $subImage[6] : '',
+            'amount' => $request->amount,
+            'description' => html_entity_decode($request->description),
+            'image' => $mainImage,
+            'image_1' => $subImagesName[0],
+            'image_2' => $subImagesName[1],
+            'image_3' => $subImagesName[2],
+            'image_4' => $subImagesName[3],
+            'image_5' => $subImagesName[4],
+            'image_6' => $subImagesName[5],
             'user_id' => Auth::user()->id,
             'category_id' => $request->category,
             'address' => $request->address,
@@ -58,7 +64,16 @@ class ProductController extends Controller
     }
     public function show($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $subImageName = [
+            $product->image_1,
+            $product->image_2,
+            $product->image_3,
+            $product->image_4,
+            $product->image_5,
+            $product->image_6
+        ];
+        return view('products.show', compact('product', 'subImageName'));
     }
     public function edit($id)
     {

@@ -11,7 +11,7 @@ class Product extends Model
 
     protected $fillable = [
         'title',
-        'status',
+        'amount',
         'description',
         'image',
         'image_1',
@@ -29,5 +29,13 @@ class Product extends Model
 
     public function users() {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function categories() {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function getNameCategoryAttribute() {
+        return $this->categories->title;
     }
 }

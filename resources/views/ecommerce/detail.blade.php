@@ -86,7 +86,7 @@
                             <a class="btn btn-increase" href="#"></a>
                         </div>
                     </div>
-                    <div class="wrap-butons">
+                    <div class="wrap-buttons">
                         <a href="#" class="btn add-to-cart">Add to Cart</a>
                         <div class="wrap-btn">
                             <a href="#" class="btn btn-compare">Add Compare</a>

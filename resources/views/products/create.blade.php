@@ -10,7 +10,7 @@
             <li class="item-link"><span>đăng bài</span></li>
         </ul>
     </div>
-    <div class=" main-content-area">
+    <div class=" main-content-area col-lg-12">
         <label class="wrap-address-billing create-product-form">
             <h3 class="box-title">bài viết mới</h3>
             <form action="{{ route('products.store') }}" method="POST" name="frm-billing" enctype="multipart/form-data">
@@ -32,8 +32,8 @@
                     <input id="price" type="number" name="price" value="" placeholder="Nhập giá sản phẩm" required>
                 </div>
                 <div class="row-in-form">
-                    <label for="status">tình trạng <span>(*)</span></label>
-                    <input id="status" type="text" name="status" value="" placeholder="Ví dụ: Like new" required>
+                    <label for="status">số lượng <span>(*)</span></label>
+                    <input id="status" type="number" name="amount" value="" placeholder="Nhập số lượng hàng trong kho" required>
                 </div>
                 <div class="row-in-form">
                     <label for="address">địa chỉ <span>(*)</span></label>
@@ -43,12 +43,12 @@
                     <label>ảnh chính <span>*</span></label>
                     <label for="imageProduct" class="label-image image-product">
                         <span class="fas fa-images"></span>
+                        <img src="#" alt="" class="preview-image" id="previewProductImage">
                     </label>
                     <input type="file" name="image" id="imageProduct" class="input-image">
-                    <img src="#" alt="" class="preview-image" id="previewProductImage">
                 </div>
                 <div class="row-in-form">
-                    <label for="description">Description <span>(*)</span></label>
+                    <label for="description">mô tả <span>(*)</span></label>
                     <textarea rows="8" id="description" name="description" placeholder="Description" required></textarea>
                 </div>
                 <div class="row-in-form">
@@ -57,17 +57,17 @@
                         <div class="col-4">
                             <label for="image_1" class="label-image" id="labelImage1">
                                 <span class="fas fa-images"></span>
+                                <img src="#" alt="" class="preview-sub-image" id="previewSubImage1">
                             </label>
                             <input type="file" name="subImages[]" id="image_1" class="input-image">
-                            <img src="#" alt="" class="preview-image" id="previewSubImage1">
                         </div>
                         @for ($i=2; $i<=6; $i++)
                             <div class="col-4">
                                 <label for="image_{{ $i }}" class="label-image d-none" id="labelImage{{ $i }}">
                                     <span class="fas fa-images"></span>
+                                    <img src="#" alt="" class="preview-sub-image" id="previewSubImage{{ $i }}">
                                 </label>
                                 <input type="file" name="subImages[]" id="image_{{ $i }}" class="input-image">
-                                <img src="#" alt="" class="preview-image" id="previewSubImage{{ $i }}">
                             </div>
                         @endfor
                     </div>

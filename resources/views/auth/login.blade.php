@@ -5,10 +5,11 @@
 
 @section('content')
     <div class="wrap-breadcrumb">
-        <ul>
-            <li class="item-link"><a href="{{ route('home') }}" class="link">home</a></li>
-            <li class="item-link"><span>đăng nhập</span></li>
-        </ul>
+        <div>
+            <a href="#" class="link">Shopee</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>Đăng Nhập</span>
+        </div>
     </div>
     <div class="row">
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 col-md-offset-3">

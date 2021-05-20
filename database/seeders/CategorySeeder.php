@@ -15,19 +15,22 @@ class CategorySeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-            'title' => 'Phone & Tablet',
+            'title' => 'Điện thoại & Phụ kiện',
         ]);
         DB::table('categories')->insert([
-            'title' => 'Laptop',
+            'title' => 'Máy tính & Laptop',
         ]);
         DB::table('categories')->insert([
-            'title' => 'Home Life',
+            'title' => 'Đồ dùng nhà bếp & Phòng ăn',
         ]);
         DB::table('categories')->insert([
-            'title' => 'Beauty & Heart',
+            'title' => 'Sức khỏe & Sắc đẹp',
         ]);
         DB::table('categories')->insert([
-            'title' => 'Fashion',
+            'title' => 'Thời trang nam',
+        ]);
+        DB::table('categories')->insert([
+            'title' => 'Thời trang nữ',
         ]);
     }
 }
