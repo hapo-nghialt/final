@@ -79,7 +79,6 @@
 .widget.filter-widget .vertical-list li a.btn-control:hover::before,
 .product-list-style .advance-info .add-to-cart:hover,
 .detail-media .flex-control-nav .owl-nav button:hover,
-.wrap-iten-in-cart .products-cart .quantity .quantity-input .btn:hover,
 .wrap-pagination-info .page-numbers li .page-number-item:hover{
 	background: #ff2832 !important;
 }

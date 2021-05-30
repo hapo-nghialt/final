@@ -11,7 +11,7 @@
         </ul>
     </div>
     <div class=" main-content-area">
-        <div class="wrap-address-billing">
+        <div class="cart-page-shop">
             <h3 class="box-title">Billing Address</h3>
             <form action="#" method="get" name="frm-billing">
                 <p class="row-in-form">

@@ -6,19 +6,14 @@
     <title>AdminLTE 3 | Dashboard</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <link rel="stylesheet" href={{ asset('css/app.css') }} rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-
-    <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__shake" src={{ asset('images/admin/icon-loading.jpg') }} alt="AdminLTELogo" height="90" width="90">
+        <img class="animation__shake" src="{{ asset('images/admin/icon-loading.jpg') }}" alt="AdminLTELogo" height="90" width="90">
     </div>
-
-    <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
@@ -30,10 +25,7 @@
                 <a href="#" class="nav-link">Contact</a>
             </li>
         </ul>
-
-        <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-            <!-- Navbar Search -->
             <li class="nav-item">
                 <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                     <i class="fas fa-search"></i>
@@ -54,8 +46,6 @@
                     </form>
                 </div>
             </li>
-
-            <!-- Messages Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <i class="far fa-comments"></i>
@@ -63,7 +53,6 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <a href="#" class="dropdown-item">
-                        <!-- Message Start -->
                         <div class="media">
                             <img src="https://cdn1.iconfinder.com/data/icons/shiba-inu/500/Shiba_Inu_Emoticon-14-512.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                             <div class="media-body">
@@ -75,11 +64,9 @@
                                 <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                             </div>
                         </div>
-                        <!-- Message End -->
                     </a>
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item">
-                        <!-- Message Start -->
                         <div class="media">
                             <img src="https://cdn1.iconfinder.com/data/icons/shiba-inu/500/Shiba_Inu_Emoticon-14-512.png" alt="User Avatar" class="img-size-50 img-circle mr-3">
                             <div class="media-body">
@@ -91,11 +78,9 @@
                                 <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                             </div>
                         </div>
-                        <!-- Message End -->
                     </a>
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item">
-                        <!-- Message Start -->
                         <div class="media">
                             <img src="https://cdn1.iconfinder.com/data/icons/shiba-inu/500/Shiba_Inu_Emoticon-14-512.png" alt="User Avatar" class="img-size-50 img-circle mr-3">
                             <div class="media-body">
@@ -107,13 +92,11 @@
                                 <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                             </div>
                         </div>
-                        <!-- Message End -->
                     </a>
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
                 </div>
             </li>
-            <!-- Notifications Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <i class="far fa-bell"></i>
@@ -185,58 +168,39 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <!-- Add icons to the links using the .nav-icon class
-                         with font-awesome or any other icon font library -->
-                    <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
+                    <li class="nav-item">
+                        <a href="{{ route('admin.users.index') }}" class="nav-link {{ Route::is('admin.users.index') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
-                                Member management
-                                <i class="right fas fa-angle-left"></i>
+                                Quản lý thành viên
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('admin.users.index') }}" class="nav-link active">
-                                    <i class="fas fa-list-ol nav-icon"></i>
-                                    <p>Member list</p>
-                                </a>
-                            </li>
-                        </ul>
+{{--                        <ul class="nav nav-treeview">--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="{{ route('admin.users.index') }}" class="nav-link active">--}}
+{{--                                    <i class="fas fa-list-ol nav-icon"></i>--}}
+{{--                                    <p>Member list</p>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('admin.categories.index') }}" class="nav-link {{ Route::is('admin.categories.index') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-sitemap"></i>
                             <p>
-                                Category management
-                                <i class="right fas fa-angle-left"></i>
+                                Các loại mặt hàng chính
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('admin.categories.index') }}" class="nav-link active">
-                                    <i class="fas fa-list-ol nav-icon"></i>
-                                    <p>Category list</p>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                 </ul>
             </nav>
-            <!-- /.sidebar-menu -->
         </div>
-        <!-- /.sidebar -->
     </aside>
-
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         @yield('content')
     </div>
-    <!-- /.content-wrapper -->
     <footer class="main-footer">
         <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
         All rights reserved.

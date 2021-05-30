@@ -1,17 +1,18 @@
 @extends('layouts.app')
-@section('title', 'Đăng bài viết mới')
+@section('title', 'Bài viết mới')
 @section('class-body', 'checkout page')
 @section('class-main', 'main-site')
 
 @section('content')
     <div class="wrap-breadcrumb">
-        <ul>
-            <li class="item-link"><a href="{{ route('home') }}" class="link">trang chủ</a></li>
-            <li class="item-link"><span>đăng bài</span></li>
-        </ul>
+        <div>
+            <a href="{{ route('home') }}" class="link">Shopee</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>Bài viết mới</span>
+        </div>
     </div>
     <div class=" main-content-area col-lg-12">
-        <label class="wrap-address-billing create-product-form">
+        <div class="cart-page-shop create-product-form">
             <h3 class="box-title">bài viết mới</h3>
             <form action="{{ route('products.store') }}" method="POST" name="frm-billing" enctype="multipart/form-data">
                 @csrf
@@ -62,7 +63,7 @@
                             <input type="file" name="subImages[]" id="image_1" class="input-image">
                         </div>
                         @for ($i=2; $i<=6; $i++)
-                            <div class="col-4">
+                            <div class="col-4 input-sub-image">
                                 <label for="image_{{ $i }}" class="label-image d-none" id="labelImage{{ $i }}">
                                     <span class="fas fa-images"></span>
                                     <img src="#" alt="" class="preview-sub-image" id="previewSubImage{{ $i }}">

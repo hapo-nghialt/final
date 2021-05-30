@@ -19,6 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
         'email_verified_at', 'role_id', 'phone_number', 'address', 'avatar', 'created_at', 'updated_at'
@@ -52,13 +53,23 @@ class User extends Authenticatable
         return $this->hasMany(Product::class);
     }
 
+    public function orders() {
+        return $this->hasMany(Order::class, 'customer_id');
+    }
+
     public function getCreatedDateFormat()
     {
         $createdAt = Carbon::parse($this->created_at)->format('d-m-Y');
         return $createdAt;
     }
 
-    public function getNumberItemAttribute() {
+    public function getNumberItemAttribute()
+    {
         return $this->products()->count();
+    }
+
+    public function getNumberOrderAttribute()
+    {
+        return $this->orders()->count();
     }
 }

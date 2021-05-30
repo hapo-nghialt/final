@@ -30,7 +30,6 @@ class ProductController extends Controller
             $mainImage = uniqid() . "_" . $request->image->getClientOriginalName();
             $request->file('image')->storeAs('public/products', $mainImage);
         }
-        dd(htmlentities($request->description));
         $subImages = $request->subImages;
         $subImagesName = [];
         foreach ($subImages as $key => $image) {
@@ -73,7 +72,8 @@ class ProductController extends Controller
             $product->image_5,
             $product->image_6
         ];
-        return view('products.show', compact('product', 'subImageName'));
+        $numberOrder = Auth::user()->number_order;
+        return view('products.show', compact('product', 'subImageName', 'numberOrder'));
     }
     public function edit($id)
     {

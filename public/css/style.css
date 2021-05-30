@@ -387,7 +387,6 @@ input,textarea{
 .topbar-menu-area .topbar-menu ul li a{
 	display: inline-block;
 	text-decoration: none;
-	text-transform: capitalize;
 }
 .topbar-menu-area .topbar-menu.left-menu{
 	float: left;
@@ -608,12 +607,12 @@ header.fill-color .main-info-area .right-section .wrap-icon-section.minicart .in
 }
 .main-info-area .right-section .wrap-icon-section .index{
 	color: #fff;
-    font-size: 12px;
-    line-height: 12px;
-    display: block;
-    background: #888;
-    padding: 1.5px 7px;
-    border-radius: 2px;
+  font-size: 12px;
+  line-height: 12px;
+  display: block;
+  background: #888;
+  padding: 1.5px 7px;
+  border-radius: 2px;
 }
 header.fill-color .main-info-area .right-section .wrap-icon-section .link-direction>i{
     color: #ffffff;
@@ -3000,9 +2999,9 @@ vertical-align: top;
     left: 0;
     background: #e6e6e6;
 }
-.wrap-login-item .form-item input[type="text"],
-.wrap-login-item .form-item input[type="password"],
-.wrap-login-item .form-item input[type="email"]{
+.form-item input[type="text"],
+.form-item input[type="password"],
+.form-item input[type="email"]{
     border: 1px solid #e6e6e6;
     outline: none;
     width: 100%;
@@ -3877,17 +3876,6 @@ article.single-post blockquote p:last-child::after{
 .post-footer .comment-form fieldset.input-field input[type=submit]:hover{
     background-color: #333333;
 }
-.wrap-iten-in-cart .box-title{
-    font-size: 14px;
-    color: #222222;
-    font-weight: 700;
-    text-align: left;
-    display: block;
-    margin: 0;
-    text-transform: uppercase;
-    margin-bottom: 18px;
-    margin-top: -2px;
-}
 .wrap-iten-in-cart .products-cart{
     padding: 0;
     border-top: 1px solid #e6e6e6;
@@ -4280,74 +4268,6 @@ article.single-post blockquote p:last-child::after{
     padding-bottom: 20px;
     margin-bottom: 15px;
 }
-.wrap-product-detail .detail-info .quantity-input{
-    display: inline-block;
-    width: 142px;
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    margin-top: 4px;
-    font-size: 0;
-    text-align: left;
-}
-.wrap-product-detail .detail-info .quantity-input input{
-    display: block;
-    border: none;
-    outline: none;
-    font-size: 15px;
-    line-height: 24px;
-    font-weight: 600;
-    height: 36px;
-    width: 40%;
-    text-align: center;
-    float: left;
-    padding: 0 3px;
-    border: none;
-    border-radius: 3px;
-}
-.wrap-product-detail .detail-info .quantity-input .btn{
-    display: block;
-    width: 26px;
-    height: 26px;
-    font-size: 0;
-    background-color: transparent;
-    margin-top: 5px;
-    position: relative;
-    border-radius: 50%;
-    outline: none;
-    box-shadow: none;
-    float: left;
-}
-
-.wrap-product-detail .detail-info .quantity-input .btn-increase,
-.wrap-product-detail .detail-info .quantity-input .btn-reduce{
-  width: 30%;
-}
-.wrap-product-detail .detail-info .quantity-input .btn::before{
-    content: "";
-    width: 12px;
-    height: 2px;
-    background-color: #666666;
-    display: inline-block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-}
-.wrap-product-detail .detail-info .quantity-input .btn.btn-increase::after{
-    content: "";
-    width: 2px;
-    height: 12px;
-    background-color: #666666;
-    display: inline-block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-}
 .wrap-product-detail .detail-info .wrap-buttons{
     display: inline-block;
     width: 190px;
@@ -4677,7 +4597,7 @@ table.shop_attributes tbody{
 .detail .main-content-area{
     margin-bottom: 10px;
 }
-.wrap-address-billing .row-in-form{
+.cart-page-shop .row-in-form{
     margin: 0;
     display: block;
     float: left;
@@ -4686,27 +4606,27 @@ table.shop_attributes tbody{
     width: -moz-calc( 50% - 15px );
     margin-bottom: 23px;
 }
-.wrap-address-billing .row-in-form.fill-wife{
+.cart-page-shop .row-in-form.fill-wife{
     width: 100%;
     margin-right: 0px !important; 
 }
-.wrap-address-billing .row-in-form label.checkbox-field{
+.cart-page-shop .row-in-form label.checkbox-field{
     display: inline-block;
     margin-bottom: 0;
     margin-top: 2px;
 }
-.wrap-address-billing .row-in-form label.checkbox-field:not(:last-child){
+.cart-page-shop .row-in-form label.checkbox-field:not(:last-child){
     margin-right: 17px;
 }
-.wrap-address-billing .row-in-form label:first-letter{
+.cart-page-shop .row-in-form label:first-letter{
     text-transform: uppercase;
 }
-.wrap-address-billing .row-in-form label span{
+.cart-page-shop .row-in-form label span{
     color: #ff2832;
 }
-.wrap-address-billing .row-in-form input[type=email],
-.wrap-address-billing .row-in-form input[type=text],
-.wrap-address-billing .row-in-form input[type=number]{
+.cart-page-shop .row-in-form input[type=email],
+.cart-page-shop .row-in-form input[type=text],
+.cart-page-shop .row-in-form input[type=number]{
     font-size: 13px;
     line-height: 19px;
     display: inline-block; 
@@ -4716,14 +4636,14 @@ table.shop_attributes tbody{
     border: 1px solid #e6e6e6;
     font-weight: normal;
 }
-.wrap-address-billing .row-in-form input[type=email]::placeholder,
-.wrap-address-billing .row-in-form input[type=text]::placeholder,
-.wrap-address-billing .row-in-form input[type=tel]::placeholder,
-.wrap-address-billing .row-in-form input[type=number]::placeholder,
-.wrap-address-billing .row-in-form textarea::placeholder{
+.cart-page-shop .row-in-form input[type=email]::placeholder,
+.cart-page-shop .row-in-form input[type=text]::placeholder,
+.cart-page-shop .row-in-form input[type=tel]::placeholder,
+.cart-page-shop .row-in-form input[type=number]::placeholder,
+.cart-page-shop .row-in-form textarea::placeholder{
     color: #aaaaaa;
 }
-.wrap-address-billing .row-in-form:nth-child(2n+1){
+.cart-page-shop .row-in-form:nth-child(2n+1){
     margin-right: 30px;
 }
 .summary-checkout{
@@ -4867,23 +4787,10 @@ table.shop_attributes tbody{
     width: 100%;
     border: 1px solid #e6e6e6;
 }
-.summary-item .title-box,
-.wrap-address-billing .box-title{
-    font-size: 14px;
-    color: #333333;
-    line-height: 20px;
-    text-align: left;
-    text-transform: uppercase;
-    font-weight: 700;
-    border-bottom: 1px solid #e6e6e6;
-    margin-bottom: 18px;
-    padding-bottom: 15px;
-    margin-top: 0;
-}
 .summary-item .title-box{
     margin-bottom: 14px !important;
 }
-.wrap-address-billing{
+.cart-page-shop{
     display: inline-block;
 }
 .payment-method .choose-payment-methods{
@@ -4908,9 +4815,6 @@ table.shop_attributes tbody{
 }
 .checkout .wrap-breadcrumb ul{
     margin-bottom: 31px;
-}
-.wrap-address-billing>.box-title{
-    margin-bottom: 25px;
 }
 .fill-color.header-toggle .wrap-toggle-menu{
     height: 40px;
@@ -6518,7 +6422,7 @@ background-color: #888888;
     .wrap-main-slide-2 .wrap-banners.type-3{
         max-width: 290px !important;
     }
-    .wrap-address-billing .row-in-form{
+    .cart-page-shop .row-in-form{
         width: 100%;
         margin-right: 0 !important;
         margin-left: 0 !important;
@@ -6967,11 +6871,7 @@ background-color: #888888;
  }
 
  .form-stl{
-    border: 1px solid #e6e6e6;
     padding: 40px 20px;
-    /* box-shadow: 0 8px 6px -6px black; */
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
-    border-radius: .5rem;
  }
 
  .wrap-login-item .form-item.register-form::before {

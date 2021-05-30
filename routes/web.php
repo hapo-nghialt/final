@@ -28,13 +28,15 @@ Route::resource('products', App\Http\Controllers\ProductController::class);
 
 Route::resource('users', App\Http\Controllers\UserController::class);
 
+Route::resource('orders', App\Http\Controllers\OrderController::class);
+
+Route::get('/cart', [App\Http\Controllers\UserController::class, 'showCart'])->name('users.show-cart');
+
 Route::get('/detail', function () {
     return view('ecommerce.detail');
 });
 
-Route::get('/cart', function () {
-    return view('ecommerce.cart');
-})->name('user.cart');
+
 
 Route::get('/about-us', function () {
     return view('ecommerce.about-us');

@@ -19,17 +19,16 @@
                     </div>
                     <div class="personal-card row">
                         <div class="avatar-shop col-4">
-                            <img src="https://cf.shopee.vn/file/b20844f9b90842765db827178a6fd62b_tn" alt="">
+                            <img src="{{ asset('images/avatar-null.png') }}" alt="">
                         </div>
-                        <div class="col-8">
-                            <p class="summary-info">
-                                <b class="index">{{ $user->name }}</b>
-                            </p>
+                        <div class="col-8 summary-info">
+                            <b class="index">{{ $user->name }}</b>
+                            <div class="update-info" data-toggle="modal" data-target="#editUserModal">Chỉnh sửa thông tin</div>
                         </div>
                     </div>
                 </div>
                 <div class="summary-item personal-items">
-                    <h4 class="title-box f-title">thông tin</h4>
+                    <h4 class="box-title f-title">thông tin</h4>
                     <div class="row">
                         <p class="summary-info col-6">
                             <span class="title">Sản phẩm: </span>
@@ -228,3 +227,4 @@
         </div>
     </div>
 @endsection
+@include('modal.edit_user_modal')

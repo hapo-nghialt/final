@@ -43,7 +43,9 @@
                                 </label>
                                 <a class="link-function left-position" href="#" title="Forgotten password?">Quên mật khẩu?</a>
                             </fieldset>
-                            <input type="submit" class="btn btn-submit" value="Đăng nhập" name="submit">
+                            <fieldset class="d-flex justify-content-center">
+                                <input type="submit" class="btn btn-submit" value="Đăng nhập" name="submit">
+                            </fieldset>
                         </form>
                     </div>
                 </div>

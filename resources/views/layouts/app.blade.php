@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="shortcut icon" href="{{ asset('images/icon.png') }}">
     <title>@yield('title')</title>
     <link rel="shortcut icon" type="image/x-icon" href={{ asset('images/favicon.ico') }}>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400italic,700,700italic,900,900italic&amp;subset=latin,latin-ext" rel="stylesheet">
@@ -45,21 +47,21 @@
                                             <a title="My Account" href="#">{{ Auth::user()->name }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                             <ul class="submenu curency">
                                                 @if (Auth::user()->role_id == \App\Models\User::ROLE['admin'])
-                                                    <li class="menu-item"><a href={{ route('admin.home') }}>Trang admin</a></li>
+                                                    <li class="menu-item"><a href="{{ route('admin.home') }}" target="_blank">Trang Admin</a></li>
                                                 @endif
-                                                <li class="menu-item"><a href={{ route('users.show', Auth::user()->id) }}>Trang cá nhân</a></li>
-                                                <li class="menu-item" ><a href="javascript:$('#logout-form').submit()">Đăng xuất</a></li>
+                                                <li class="menu-item"><a href="{{ route('users.show', Auth::user()->id) }}">Trang Cá Nhân</a></li>
+                                                <li class="menu-item" ><a href="javascript:$('#logout-form').submit()">Đăng Xuất</a></li>
                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                                     @csrf
                                                     <button type="submit" hidden title="Logout">
-                                                        Đăng xuất
+                                                        Đăng Xuất
                                                     </button>
                                                 </form>
                                             </ul>
                                         </li>
                                     @else
-                                        <li class="menu-item" ><a title="Register or Login" href={{ route('login') }}>Đăng nhập</a></li>
-                                        <li class="menu-item" ><a title="Register or Login" href={{ route('register') }}>Đăng ký</a></li>
+                                        <li class="menu-item" ><a title="Register or Login" href={{ route('login') }}>Đăng Nhập</a></li>
+                                        <li class="menu-item" ><a title="Register or Login" href={{ route('register') }}>Đăng Ký</a></li>
                                     @endif
                                 </ul>
                             </div>
@@ -82,10 +84,44 @@
                             </div>
                             <div class="wrap-icon right-section">
                                 <div class="wrap-icon-section minicart d-flex justify-content-center">
-                                    <a href="{{ route('user.cart') }}" class="link-direction link-cart d-flex align-items-center">
-                                        <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                                        <span class="index">4</span>
-                                    </a>
+                                    <div class="link-direction link-cart d-flex align-items-center" id="linkCart">
+                                        <a href="{{ route('users.show-cart') }}">
+                                            <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                                        </a>
+                                        @if (Auth::check() && (Auth::user()->number_order != 0))
+                                            <span class="index" id="numberOrderToCart">{{ Auth::user()->number_order }}</span>
+                                        @endif
+                                        <div class="list-item" id="listItem">
+                                            <span class="caret-up"></span>
+                                            @if ((Auth::check() && (Auth::user()->number_order == 0)) || !Auth::check())
+                                                <div class="cart-empty" id="cartEmpty">
+                                                    <img src="{{ asset('images/cart-empty.png') }}" alt="">
+                                                    <div>Chưa có sản phẩm</div>
+                                                </div>
+                                            @elseif (Auth::check())
+                                                <div class="new-item-text">Sản phẩm mới thêm</div>
+                                                @foreach($orders as $order)
+                                                    <a href="{{ route('products.show', $order->products()->first()->id) }}">
+                                                        <div class="cart-item">
+                                                            <input type="hidden" name="orderId[]" value="{{ $order->product_id }}">
+                                                            <div class="cart-item-image">
+                                                                <img src="{{ asset('storage/products/' . $order->products()->first()->image) }}" alt="">
+                                                            </div>
+                                                            <div class="cart-item-information">
+                                                                <div class="cart-item-name">
+                                                                    {{ $order->products()->first()->title }}
+                                                                </div>
+                                                                <div class="cart-item-price">
+                                                                    ₫{{ number_format($order->products()->first()->price, 0) }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                @endforeach
+                                                <a class="see-cart-button" href="{{ route('users.show-cart') }}">Xem giỏ hàng</a>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                                 @if(Auth::check())
                                     <div class="wrap-icon-section d-flex justify-content-center">

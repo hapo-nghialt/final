@@ -32,6 +32,7 @@ class CreateProductsTable extends Migration
             $table->text('address');
             $table->integer('price');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
