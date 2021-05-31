@@ -39,7 +39,7 @@
                     <input type="hidden" id="urlAddToCart" value="{{ route('orders.store') }}">
                     <input type="hidden" id="unitPrice" value="{{ $product->price }}">
                     <input type="hidden" id="numberOrder" value="{{ $numberOrder }}">
-                    <input type="hidden" id="imageCart" value="{{ asset('images/add-to-card-successfully.png') }}">
+                    <input type="hidden" id="imageSuccess" value="{{ asset('images/add-to-card-successfully.png') }}">
                     <h2 class="product-name">{{ $product->title }}</h2>
                     <div class="wrap-price"><span class="product-price"><span>₫</span>{{ number_format($product->price, 0) }}</span></div>
                     <div class="quantity row m-0">

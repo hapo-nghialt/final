@@ -61,7 +61,7 @@ $(document).ready(function() {
     let quantity = $('#productQuantity').val();
     let unitPrice = $('#unitPrice').val();
     let numberOrder = Number($('#numberOrder').val());
-    let imageCart = $('#imageCart').val();
+    let imageSuccess = $('#imageSuccess').val();
     let url = $('#urlAddToCart').val();
     let amount = quantity * unitPrice;
     $.ajax({
@@ -87,7 +87,7 @@ $(document).ready(function() {
         $("#numberOrder").val(numberOrder);
         $(".message-add-to-cart").append(
             "<div>" +
-            "<img alt='' src=" + imageCart + ">" +
+            "<img alt='' src=" + imageSuccess + ">" +
             result.message +
             "</div>"
         );
@@ -200,12 +200,9 @@ $(document).ready(function() {
       }
     }
   });
-  $('#change-user-avatar').change(function() {
+  $('#avatar').change(function() {
     readURL(this, $('#previewUserAvatar'));
     $('#user-avatar').remove();
     $('#previewUserAvatar').css('width', '100%');
   });
-  $('#updateUser').click(function() {
-    window.alert('1234')
-  })
 });

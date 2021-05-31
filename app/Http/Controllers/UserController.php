@@ -39,9 +39,14 @@ class UserController extends Controller
     {
         //
     }
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $user = User::findOrFail(Auth::user()->id);
+        dd($request->file('avatar'));
+        $user->update([
+            'name' => $request->name,
+        ]);
+        return redirect()->route('users.show', Auth::user()->id)->with('message', '123');
     }
     public function destroy($id)
     {
