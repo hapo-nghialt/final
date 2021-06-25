@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class EcommerceController extends Controller
 {
     public function index()
     {
-        return view('ecommerce.home');
+        $categories = Category::get();
+        return view('ecommerce.home', compact('categories'));
     }
 }

@@ -19,6 +19,22 @@
     <link rel="stylesheet" type="text/css" href={{ asset('css/app.css') }}>
     <link rel="stylesheet" type="text/css" href={{ asset('css/style.css') }}>
     <link rel="stylesheet" type="text/css" href={{ asset('css/color-01.css') }}>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script>
+
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('bc3fd55ce2605f3cfa30', {
+            cluster: 'ap1'
+        });
+
+        var channel = pusher.subscribe('laravel-chat');
+        channel.bind('App\\Events\\Chat', function(data) {
+            $(".messages").animate({scrollTop: $(document).height()}, "fast");
+            $('<li class="replies"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' + data.message + '</p></li>').appendTo($('.messages ul'));
+        });
+    </script>
 </head>
 <body class="@yield('class-body')">
     <div class="mercado-clone-wrap">
@@ -36,14 +52,46 @@
                             <div class="topbar-menu left-menu">
                                 <ul>
                                     <li class="menu-item" >
-                                        <a title="Hotline: 0968.193.632" href="#" ><span class="icon label-before fa fa-mobile"></span>Hotline: 0968.193.632</a>
+                                        <a title="Hotline: 0968.193.632" href="#">
+                                            <span class="icon label-before fa fa-mobile"></span>Hotline: 0968.193.632
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="topbar-menu right-menu">
                                 <ul>
+                                    <li class="menu-item menu-item-has-children parent btn-list-notification">
+                                        <a href="#"><i class="far fa-bell"></i>&nbsp;Thông báo</a>
+                                        <span class="caret-up"></span>
+                                        @if (Auth::check())
+                                            <div class="list-notification">
+                                                <span class="caret-up"></span>
+                                                @if (sizeof($notifications) != 0)
+                                                <div class="new-item-text">Thông báo mới nhận</div>
+                                                    @foreach ($notifications as $notification)
+                                                    <a href="">
+                                                        <div class="notification">
+                                                            <div class="cart-item-image">
+                                                                <img src="{{ asset('images/avatar-null.png') }}" alt="">
+                                                            </div>
+                                                            <div class="cart-item-information">
+                                                                {{ $notification->content }}
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <a class="see-all-notification" id="" href="{{ route('users.show-cart') }}">Xem tất cả</a>
+                                                    @endforeach
+                                                @else
+                                                    <div class="cart-empty">
+                                                        <img src="{{ asset('images/notification-empty.png') }}" alt="">
+                                                        <div>Chưa có thông báo</div>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        @endif
+                                    </li>
                                     @if (Auth::check())
-                                        <li class="menu-item menu-item-has-children parent" >
+                                        <li class="menu-item menu-item-has-children parent">
                                             <a title="My Account" href="#">{{ Auth::user()->name }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                             <ul class="submenu curency">
                                                 @if (Auth::user()->role_id == \App\Models\User::ROLE['admin'])
@@ -91,9 +139,10 @@
                                         @if (Auth::check() && (Auth::user()->number_order != 0))
                                             <span class="index" id="numberOrderToCart">{{ Auth::user()->number_order }}</span>
                                         @endif
+                                        <input type="hidden" id="urlCart" value="{{ route('users.show-cart') }}">
                                         <div class="list-item" id="listItem">
                                             <span class="caret-up"></span>
-                                            @if ((Auth::check() && (Auth::user()->number_order == 0)) || !Auth::check())
+                                            @if (Auth::check() && (Auth::user()->number_order == 0))
                                                 <div class="cart-empty" id="cartEmpty">
                                                     <img src="{{ asset('images/cart-empty.png') }}" alt="">
                                                     <div>Chưa có sản phẩm</div>
@@ -109,7 +158,7 @@
                                                             </div>
                                                             <div class="cart-item-information">
                                                                 <div class="cart-item-name">
-                                                                    {{ $order->products()->first()->title }}
+                                                                    {{ $order->products()->first()->name }}
                                                                 </div>
                                                                 <div class="cart-item-price">
                                                                     ₫{{ number_format($order->products()->first()->price, 0) }}
@@ -118,7 +167,20 @@
                                                         </div>
                                                     </a>
                                                 @endforeach
-                                                <a class="see-cart-button" href="{{ route('users.show-cart') }}">Xem giỏ hàng</a>
+                                                <a class="see-cart-button" id="seeCartButton" href="{{ route('users.show-cart') }}">Xem giỏ hàng</a>
+                                            @elseif (!Auth::check())
+                                                <div class="cart-empty" id="cartEmpty">
+                                                    <img src="{{ asset('images/cart-empty.png') }}" alt="">
+                                                    <div>Chưa có sản phẩm</div>
+                                                    <div class="cart-footer">
+                                                        <div>
+                                                            <a href="{{ route('login') }}">Đăng nhập</a>
+                                                        </div>
+                                                        <div>
+                                                            <a href="{{ route('register') }}">Đăng ký</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             @endif
                                         </div>
                                     </div>
@@ -306,56 +368,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="wrap-back-link">
-                    <div class="container">
-                        <div class="back-link-box">
-                            <h3 class="backlink-title">Quick Links</h3>
-                            <div class="back-link-row">
-                                <ul class="list-back-link" >
-                                    <li><span class="row-title">Mobiles:</span></li>
-                                    <li><a href="#" class="redirect-back-link" title="mobile">Mobiles</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="yphones">YPhones</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Gianee Mobiles GL">Gianee Mobiles GL</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Karbonn">Mobiles Karbonn</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Viva">Mobiles Viva</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Intex">Mobiles Intex</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Micrumex">Mobiles Micrumex</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Bsus">Mobiles Bsus</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Samsyng">Mobiles Samsyng</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Lenova">Mobiles Lenova</a></li>
-                                </ul>
-
-                                <ul class="list-back-link" >
-                                    <li><span class="row-title">Tablets:</span></li>
-                                    <li><a href="#" class="redirect-back-link" title="Plesc YPads">Plesc YPads</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Samsyng Tablets" >Samsyng Tablets</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Qindows Tablets" >Qindows Tablets</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Calling Tablets" >Calling Tablets</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Micrumex Tablets" >Micrumex Tablets</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Lenova Tablets Bsus" >Lenova Tablets Bsus</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Tablets iBall" >Tablets iBall</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Tablets Swipe" >Tablets Swipe</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Tablets TVs, Audio" >Tablets TVs, Audio</a></li>
-                                </ul>
-
-                                <ul class="list-back-link" >
-                                    <li><span class="row-title">Fashion:</span></li>
-                                    <li><a href="#" class="redirect-back-link" title="Sarees Silk" >Sarees Silk</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="sarees Salwar" >sarees Salwar</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Suits Lehengas" >Suits Lehengas</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Biba Jewellery" >Biba Jewellery</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Rings Earrings" >Rings Earrings</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Diamond Rings" >Diamond Rings</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Loose Diamond Shoes" >Loose Diamond Shoes</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="BootsMen Watches" >BootsMen Watches</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Women Watches" >Women Watches</a></li>
-                                </ul>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
             <div class="coppy-right-box">
@@ -378,6 +390,158 @@
             </div>
         </div>
     </footer>
+    <div class="chat-button row m-0" id="buttonChat">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="chat-icon">
+            <path d="M18 6.07a1 1 0 01.993.883L19 7.07v10.365a1 1 0 01-1.64.768l-1.6-1.333H6.42a1 1 0 01-.98-.8l-.016-.117-.149-1.783h9.292a1.8 1.8 0 001.776-1.508l.018-.154.494-6.438H18zm-2.78-4.5a1 1 0 011 1l-.003.077-.746 9.7a1 1 0 01-.997.923H4.24l-1.6 1.333a1 1 0 01-.5.222l-.14.01a1 1 0 01-.993-.883L1 13.835V2.57a1 1 0 011-1h13.22zm-4.638 5.082c-.223.222-.53.397-.903.526A4.61 4.61 0 018.2 7.42a4.61 4.61 0 01-1.48-.242c-.372-.129-.68-.304-.902-.526a.45.45 0 00-.636.636c.329.33.753.571 1.246.74A5.448 5.448 0 008.2 8.32c.51 0 1.126-.068 1.772-.291.493-.17.917-.412 1.246-.74a.45.45 0 00-.636-.637z"></path>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 22" class="chat-icon">
+            <path d="M9.286 6.001c1.161 0 2.276.365 3.164 1.033.092.064.137.107.252.194.09.085.158.064.203 0 .046-.043.182-.194.251-.26.182-.17.433-.43.752-.752a.445.445 0 00.159-.323c0-.172-.092-.3-.227-.365A7.517 7.517 0 009.286 4C5.278 4 2 7.077 2 10.885s3.256 6.885 7.286 6.885a7.49 7.49 0 004.508-1.484l.022-.043a.411.411 0 00.046-.71v-.022a25.083 25.083 0 00-.957-.946.156.156 0 00-.227 0c-.933.796-2.117 1.205-3.392 1.205-2.846 0-5.169-2.196-5.169-4.885C4.117 8.195 6.417 6 9.286 6zm32.27 9.998h-.736c-.69 0-1.247-.54-1.247-1.209v-3.715h1.96a.44.44 0 00.445-.433V9.347h-2.45V7.035c-.021-.043-.066-.065-.111-.043l-1.603.583a.423.423 0 00-.29.41v1.362h-1.781v1.295c0 .238.2.433.445.433h1.337v4.19c0 1.382 1.158 2.505 2.583 2.505H42v-1.339a.44.44 0 00-.445-.432zm-21.901-6.62c-.739 0-1.41.172-2.013.496V4.43a.44.44 0 00-.446-.43h-1.788v13.77h2.234v-4.303c0-1.076.895-1.936 2.013-1.936 1.117 0 2.01.86 2.01 1.936v4.239h2.234v-4.561l-.021-.043c-.202-2.088-2.012-3.723-4.223-3.723zm10.054 6.785c-1.475 0-2.681-1.12-2.681-2.525 0-1.383 1.206-2.524 2.681-2.524 1.476 0 2.682 1.12 2.682 2.524 0 1.405-1.206 2.525-2.682 2.525zm2.884-6.224v.603a4.786 4.786 0 00-2.985-1.035c-2.533 0-4.591 1.897-4.591 4.246 0 2.35 2.058 4.246 4.59 4.246 1.131 0 2.194-.388 2.986-1.035v.604c0 .237.203.431.453.431h1.356V9.508h-1.356c-.25 0-.453.173-.453.432z"></path>
+        </svg>
+    </div>
+    <div class="chat-content">
+        <div class="chat-header">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 22" class="chat-icon">
+                <path d="M9.286 6.001c1.161 0 2.276.365 3.164 1.033.092.064.137.107.252.194.09.085.158.064.203 0 .046-.043.182-.194.251-.26.182-.17.433-.43.752-.752a.445.445 0 00.159-.323c0-.172-.092-.3-.227-.365A7.517 7.517 0 009.286 4C5.278 4 2 7.077 2 10.885s3.256 6.885 7.286 6.885a7.49 7.49 0 004.508-1.484l.022-.043a.411.411 0 00.046-.71v-.022a25.083 25.083 0 00-.957-.946.156.156 0 00-.227 0c-.933.796-2.117 1.205-3.392 1.205-2.846 0-5.169-2.196-5.169-4.885C4.117 8.195 6.417 6 9.286 6zm32.27 9.998h-.736c-.69 0-1.247-.54-1.247-1.209v-3.715h1.96a.44.44 0 00.445-.433V9.347h-2.45V7.035c-.021-.043-.066-.065-.111-.043l-1.603.583a.423.423 0 00-.29.41v1.362h-1.781v1.295c0 .238.2.433.445.433h1.337v4.19c0 1.382 1.158 2.505 2.583 2.505H42v-1.339a.44.44 0 00-.445-.432zm-21.901-6.62c-.739 0-1.41.172-2.013.496V4.43a.44.44 0 00-.446-.43h-1.788v13.77h2.234v-4.303c0-1.076.895-1.936 2.013-1.936 1.117 0 2.01.86 2.01 1.936v4.239h2.234v-4.561l-.021-.043c-.202-2.088-2.012-3.723-4.223-3.723zm10.054 6.785c-1.475 0-2.681-1.12-2.681-2.525 0-1.383 1.206-2.524 2.681-2.524 1.476 0 2.682 1.12 2.682 2.524 0 1.405-1.206 2.525-2.682 2.525zm2.884-6.224v.603a4.786 4.786 0 00-2.985-1.035c-2.533 0-4.591 1.897-4.591 4.246 0 2.35 2.058 4.246 4.59 4.246 1.131 0 2.194-.388 2.986-1.035v.604c0 .237.203.431.453.431h1.356V9.508h-1.356c-.25 0-.453.173-.453.432z"></path>
+            </svg>
+        </div>
+        <div class="chat-body row m-0">
+            <div class="content">
+                <div class="contact-profile">
+                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                    <p>Harvey Specter</p>
+                </div>
+                <div class="messages">
+                    <ul>
+                        <li class="sent">
+                            <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
+                        </li>
+{{--                        <li class="replies">--}}
+{{--                            <p>When you're backed against the wall, break the god damn thing down.</p>--}}
+{{--                        </li>--}}
+{{--                        <li class="replies">--}}
+{{--                            <p>Excuses don't win championships.</p>--}}
+{{--                        </li>--}}
+{{--                        <li class="sent">--}}
+{{--                            <p>Oh yeah, did Michael Jordan tell you that?</p>--}}
+{{--                        </li>--}}
+{{--                        <li class="replies">--}}
+{{--                            <p>No, I told him that.</p>--}}
+{{--                        </li>--}}
+{{--                        <li class="replies">--}}
+{{--                            <p>What are your choices when someone puts a gun to your head?</p>--}}
+{{--                        </li>--}}
+{{--                        <li class="sent">--}}
+{{--                            <p>What are you talking about? You do what they say or they shoot you.</p>--}}
+{{--                        </li>--}}
+{{--                        <li class="replies">--}}
+{{--                            <p>Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>--}}
+{{--                        </li>--}}
+                    </ul>
+                </div>
+                <div class="message-input">
+                    <div class="wrap">
+                        <input type="text" placeholder="Write your message..." id="message"/>
+                        <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+                        <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="contacts">
+                <ul>
+                    <li class="contact">
+                        <div class="wrap">
+                            <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
+                            <div class="meta">
+                                <p class="name">Louis Litt</p>
+                                <p class="preview">You just got LITT up, Mike.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="contact active">
+                        <div class="wrap">
+                            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                            <div class="meta">
+                                <p class="name">Harvey Specter</p>
+                                <p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="contact">
+                        <div class="wrap">
+                            <img src="http://emilcarlsson.se/assets/rachelzane.png" alt="" />
+                            <div class="meta">
+                                <p class="name">Rachel Zane</p>
+                                <p class="preview">I was thinking that we could have chicken tonight, sounds good?</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="contact">
+                        <div class="wrap">
+                            <img src="http://emilcarlsson.se/assets/donnapaulsen.png" alt="" />
+                            <div class="meta">
+                                <p class="name">Donna Paulsen</p>
+                                <p class="preview">Mike, I know everything! I'm Donna..</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="contact">
+                        <div class="wrap">
+                            <img src="http://emilcarlsson.se/assets/jessicapearson.png" alt="" />
+                            <div class="meta">
+                                <p class="name">Jessica Pearson</p>
+                                <p class="preview">Have you finished the draft on the Hinsenburg deal?</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="contact">
+                        <div class="wrap">
+                            <img src="http://emilcarlsson.se/assets/haroldgunderson.png" alt="" />
+                            <div class="meta">
+                                <p class="name">Harold Gunderson</p>
+                                <p class="preview">Thanks Mike! :)</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="contact">
+                        <div class="wrap">
+                            <img src="http://emilcarlsson.se/assets/danielhardman.png" alt="" />
+                            <div class="meta">
+                                <p class="name">Daniel Hardman</p>
+                                <p class="preview">We'll meet again, Mike. Tell Jessica I said 'Hi'.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="contact">
+                        <div class="wrap">
+                            <img src="http://emilcarlsson.se/assets/katrinabennett.png" alt="" />
+                            <div class="meta">
+                                <p class="name">Katrina Bennett</p>
+                                <p class="preview">I've sent you the files for the Garrett trial.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="contact">
+                        <div class="wrap">
+                            <img src="http://emilcarlsson.se/assets/charlesforstman.png" alt="" />
+                            <div class="meta">
+                                <p class="name">Charles Forstman</p>
+                                <p class="preview">Mike, this isn't over.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="contact">
+                        <div class="wrap">
+                            <img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
+                            <div class="meta">
+                                <p class="name">Jonathan Sidwell</p>
+                                <p class="preview">That's bullshit. This deal is solid.</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <script src={{ asset('js/jquery-1.12.4.minb8ff.js?ver=1.12.4') }}></script>
     <script src={{ asset('js/jquery-ui-1.12.4.minb8ff.js?ver=1.12.4') }}></script>
     <script src={{ asset('js/bootstrap.min.js') }}></script>
@@ -390,3 +554,32 @@
     <script src={{ asset('js/app.js') }}></script>
 </body>
 </html>
+<script>
+    $('.submit').click(function (e) {
+        e.preventDefault();
+        var formComment = new FormData();
+        var message = $('#message').val();
+        var boxChat = $('.messages');
+        boxChat[0].scrollTop = boxChat[0].scrollHeight;
+        formComment.append('message', message);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            contentType: false,
+            processData: false,
+            url: '{{ route('chat.submit') }}',
+            type: 'POST',
+            dataType: 'json',
+            data: formComment,
+            success: function (response) {
+                $('<li class="replies"><p>' + response.message + '</p></li>').appendTo($('.messages ul'));
+                $('.message-input input').val(null);
+            }, error: function () {
+                alert("Có lỗi xảy ra");
+            },
+        });
+    });
+</script>

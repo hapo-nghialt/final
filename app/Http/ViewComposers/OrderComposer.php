@@ -1,12 +1,12 @@
 <?php
 namespace App\Http\ViewComposers;
 
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class OrderComposer
 {
-    public $movieList = [];
     /**
      * Create a movie composer.
      *
@@ -28,7 +28,8 @@ class OrderComposer
         if (Auth::user()) {
             $user = Auth::user();
             $orders = $user->orders()->get();
-            $view->with('orders', $orders);
+            $notifications = Notification::where('receiver_id', $user->id)->get();
+            $view->with('orders', $orders)->with('notifications', $notifications);
         }
     }
 }

@@ -10,12 +10,15 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'description',
-        'item_count'
+        'name',
+        'image',
     ];
 
     public function products() {
         return $this->hasMany(Product::class, 'category_id');
+    }
+
+    public function getNumberProductsAttribute() {
+        return $this->products()->count();
     }
 }

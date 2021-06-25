@@ -46,10 +46,6 @@ $(document).ready(function() {
   $("#image_6").change(function () {
     readURL(this, $('#previewSubImage6'));
   });
-  $('#linkCart').hover(function() {
-    let top = $(window).innerWidth()/1903*1013;
-    $('#listItem').css('left', top);
-  });
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -64,6 +60,7 @@ $(document).ready(function() {
     let imageSuccess = $('#imageSuccess').val();
     let url = $('#urlAddToCart').val();
     let amount = quantity * unitPrice;
+    let urlCart = $('#urlCart').val();
     $.ajax({
       url: url,
       type: "POST",
@@ -85,7 +82,7 @@ $(document).ready(function() {
         }
         numberOrder += 1;
         $("#numberOrder").val(numberOrder);
-        $(".message-add-to-cart").append(
+        $(".message-success").append(
             "<div>" +
             "<img alt='' src=" + imageSuccess + ">" +
             result.message +
@@ -94,27 +91,56 @@ $(document).ready(function() {
         $("#cartEmpty").remove();
         if (orderId.includes(productId) == false) {
           $("#numberOrderToCart").html(numberOrder);
-          $("#listItem").append(
-              "<div class='cart-item'>\n" +
-              "<input type='hidden' name='orderId[]' value=" + productId + ">" +
-              "<div class='cart-item-image'>\n" +
-              "<img src='" +
-              result.productImage +
-              "' alt=''>\n" +
-              "</div>\n" +
-              "<div class='cart-item-information'>\n" +
-              "<div class='cart-item-name'>\n" +
-              result.productTitle +
-              "</div>\n" +
-              "<div class='cart-item-price'>\n" +
-              "₫" + result.productPrice +
-              "</div>\n" +
-              "</div>\n" +
-              "</div>"
-          );
+          if (numberOrder == 1) {
+            $("#listItem").append(
+                "<div class=\"new-item-text\">Sản phẩm mới thêm</div>" +
+                "<a href='" + result.productUrl + "'>" +
+                "<div class='cart-item'>\n" +
+                "<input type='hidden' name='orderId[]' value=" + productId + ">" +
+                "<div class='cart-item-image'>\n" +
+                "<img src='" +
+                result.productImage +
+                "' alt=''>\n" +
+                "</div>\n" +
+                "<div class='cart-item-information'>\n" +
+                "<div class='cart-item-name'>\n" +
+                result.productName +
+                "</div>\n" +
+                "<div class='cart-item-price'>\n" +
+                "₫" + result.productPrice +
+                "</div>\n" +
+                "</div>\n" +
+                "</div>" +
+                "</a>" +
+                "<a class=\"see-cart-button\" id='seeCartButton' href='" + urlCart + "'>Xem giỏ hàng</a>"
+            );
+          } else {
+            $("#seeCartButton").remove();
+            $("#listItem").append(
+                "<a href='" + result.productUrl + "'>" +
+                "<div class='cart-item'>\n" +
+                "<input type='hidden' name='orderId[]' value=" + productId + ">" +
+                "<div class='cart-item-image'>\n" +
+                "<img src='" +
+                result.productImage +
+                "' alt=''>\n" +
+                "</div>\n" +
+                "<div class='cart-item-information'>\n" +
+                "<div class='cart-item-name'>\n" +
+                result.productName +
+                "</div>\n" +
+                "<div class='cart-item-price'>\n" +
+                "₫" + result.productPrice +
+                "</div>\n" +
+                "</div>\n" +
+                "</div>" +
+                "</a>" +
+                "<a class=\"see-cart-button\" id='seeCartButton' href='" + urlCart + "'>Xem giỏ hàng</a>"
+            );
+          }
         }
         setTimeout(function () {
-          $(".message-add-to-cart div").remove();
+          $(".message-success div").remove();
         }, 1000);
       }
     });
@@ -203,6 +229,56 @@ $(document).ready(function() {
   $('#avatar').change(function() {
     readURL(this, $('#previewUserAvatar'));
     $('#user-avatar').remove();
-    $('#previewUserAvatar').css('width', '100%');
+    $('#previewUserAvatar').removeClass('d-none');
   });
+  $('#image').change(function() {
+    readURL(this, $('#previewCategoryImage'));
+    $('#previewCategoryImage').removeClass('d-none');
+  });
+  setTimeout(function() {
+    $('#messageSuccess').remove();
+  }, 2000)
+  $('#buttonFollow').click(function() {
+    $('#buttonUnfollow').removeClass('d-none');
+    $('#buttonFollow').addClass('d-none');
+    url = $('#followUrl').val();
+    followerId = $('#followerId').val();
+    followingId = $('#followingId').val();
+    followerNumber = Number($('#followerNumber').html())
+    document.getElementById('followerNumber').innerHTML = followerNumber + 1;
+    $.ajax({
+      url: url,
+      type: "POST",
+      data: {
+        followerId: followerId,
+        followingId: followingId,
+      },
+      success: function (result) {
+      }
+    });
+  });
+  $('#buttonUnfollow').click(function () {
+    $('#buttonUnfollow').addClass('d-none');
+    $('#buttonFollow').removeClass('d-none');
+    url = $('#unfollowUrl').val();
+    followerId = $('#followerId').val();
+    followingId = $('#followingId').val();
+    followerNumber = Number($('#followerNumber').html())
+    document.getElementById('followerNumber').innerHTML = followerNumber - 1;
+    $.ajax({
+      url: url,
+      type: "DELETE",
+      data: {
+        followerId: followerId,
+        followingId: followingId,
+      },
+      success: function (result) {
+
+      }
+    });
+  });
+  $('#buttonChat').click(function() {
+    $(this).addClass('d-none');
+    $('.chat-content').css({'visibility': 'visible', 'opacity': '1'});
+  })
 });

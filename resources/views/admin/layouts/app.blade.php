@@ -190,7 +190,15 @@
                         <a href="{{ route('admin.categories.index') }}" class="nav-link {{ Route::is('admin.categories.index') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-sitemap"></i>
                             <p>
-                                Các loại mặt hàng chính
+                                Quản lý danh mục
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.products.index') }}" class="nav-link {{ Route::is('admin.products.index') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-cart-plus"></i>
+                            <p>
+                                Quản lý bài đăng
                             </p>
                         </a>
                     </li>

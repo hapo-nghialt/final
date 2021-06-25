@@ -41,7 +41,7 @@ class ProductController extends Controller
             array_push($subImagesName, null);
         }
         Product::create([
-            'title' => $request->title,
+            'name' => $request->name,
             'amount' => $request->amount,
             'description' => html_entity_decode($request->description),
             'image' => $mainImage,
@@ -55,7 +55,6 @@ class ProductController extends Controller
             'category_id' => $request->category,
             'address' => $request->address,
             'price' => $request->price,
-            'show_status' => 1,
             'bought_status' => 0,
         ]);
 
@@ -72,7 +71,7 @@ class ProductController extends Controller
             $product->image_5,
             $product->image_6
         ];
-        $numberOrder = Auth::user()->number_order;
+        $numberOrder = Auth::check() ? Auth::user()->number_order : 0;
         return view('products.show', compact('product', 'subImageName', 'numberOrder'));
     }
     public function edit($id)

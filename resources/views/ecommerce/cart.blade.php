@@ -11,6 +11,14 @@
             <span>Giỏ Hàng</span>
         </div>
     </div>
+    @if (session()->has('message'))
+        <div class="message-success" id="messageSuccess">
+            <div>
+                <img src="{{ asset('images/add-to-card-successfully.png') }}" alt="">
+                {{ session()->get('message') }}
+            </div>
+        </div>
+    @endif
     <div class="main-content-area col-lg-12">
         <h3 class="box-title">Giỏ Hàng</h3>
     </div>
@@ -35,8 +43,8 @@
                             <img src="{{ asset('storage/products/' . $order->products()->first()->image) }}" alt="">
                         </div>
                         <div class="cart-item-overview_product-name">
-                            <a href="{{ route('products.show', $order->products()->first()->id) }}" class="cart-item-overview__name" title="{{ $order->products()->first()->title }}">
-                                {{ $order->products()->first()->title }}
+                            <a href="{{ route('products.show', $order->products()->first()->id) }}" class="cart-item-overview__name" title="{{ $order->products()->first()->name }}">
+                                {{ $order->products()->first()->name }}
                             </a>
                         </div>
                     </div>
@@ -59,7 +67,11 @@
                     <span id="totalPrice{{ $order->id }}">₫{{ number_format($order->amount, 0) }}</span>
                 </div>
                 <div class="cart-item-action d-flex align-items-center justify-content-center">
-                    <span>Xóa</span>
+                    <form action="{{ route('orders.destroy', $order->id) }}" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="btn btn-delete-order">Xóa</button>
+                    </form>
                 </div>
             </div>
         </div>

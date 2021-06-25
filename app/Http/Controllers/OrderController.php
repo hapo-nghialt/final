@@ -19,6 +19,7 @@ class OrderController extends Controller
     }
     public function store(Request $request)
     {
+        $user = Auth::user();
         $orderCheck = Order::where('product_id', $request->productId)
             ->where('customer_id', Auth::user()->id)
             ->where('status', Order::STATUS['ordered'])->first();
@@ -38,11 +39,13 @@ class OrderController extends Controller
         };
         $product = Product::findOrFail($request->productId);
         $productImage = asset('storage/products/' . $product->image);
+        $productUrl = route('products.show', $request->productId);
         return response()->json([
             'message' => __('message.add_to_cart_success'),
             'productImage' => $productImage,
-            'productTitle' => $product->title,
+            'productName' => $product->name,
             'productPrice' => number_format($product->price, 0),
+            'productUrl' => $productUrl,
         ]);
     }
     public function show($id)
@@ -59,6 +62,8 @@ class OrderController extends Controller
     }
     public function destroy($id)
     {
-        //
+        $order = Order::findOrFail($id);
+        $order->delete();
+        return redirect()->back()->with('message', 'Xóa thành công');
     }
 }

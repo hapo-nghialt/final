@@ -31,7 +31,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo;
 
     protected $username;
 
@@ -44,6 +44,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
         $this->username = 'username';
+        $this->redirectTo = url()->previous();
     }
 
     public function username()
@@ -65,10 +66,18 @@ class LoginController extends Controller
     {
         if ($this->attemptLogin($request)) {
             if (Auth::user()) {
-                return redirect()->route('home');
+                return redirect($this->redirectTo);
             }
         }
 
         return $this->sendFailedLoginResponse($request);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect($this->redirectTo);
     }
 }

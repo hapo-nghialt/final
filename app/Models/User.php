@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -22,6 +23,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'follower',
         'email_verified_at', 'role_id', 'phone_number', 'address', 'avatar', 'created_at', 'updated_at'
     ];
 
@@ -71,5 +73,10 @@ class User extends Authenticatable
     public function getNumberOrderAttribute()
     {
         return $this->orders()->count();
+    }
+
+    public function isFollowing($id) {
+        $follower = Follow::where('follower_id', Auth::user()->id)->where('following_id', $id)->first();
+        return (isset($follower));
     }
 }

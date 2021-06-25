@@ -10,7 +10,7 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
+        'name',
         'amount',
         'description',
         'image',
@@ -21,10 +21,15 @@ class Product extends Model
         'image_5',
         'user_id',
         'category_id',
-        'show_status',
+        'status',
         'bought_status',
         'address',
         'price'
+    ];
+
+    const STATUS = [
+        'hide' => 0,
+        'show' => 1,
     ];
 
     public function users() {
@@ -36,6 +41,10 @@ class Product extends Model
     }
 
     public function getNameCategoryAttribute() {
-        return $this->categories->title;
+        return $this->categories->name;
+    }
+
+    public function getNameShopAttribute() {
+        return $this->users->name;
     }
 }

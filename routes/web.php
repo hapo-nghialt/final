@@ -17,26 +17,19 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/', [App\Http\Controllers\EcommerceController::class, 'index'])->name('home');
-
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth.admin'], function() {
     Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('home');
     Route::resource('users', App\Http\Controllers\Admin\UserController::class);
     Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
+    Route::patch('/products/update-status/{id}', [App\Http\Controllers\Admin\ProductController::class, 'updateStatus'])->name('products.update-status');
 });
-
 Route::resource('products', App\Http\Controllers\ProductController::class);
-
 Route::resource('users', App\Http\Controllers\UserController::class);
-
 Route::resource('orders', App\Http\Controllers\OrderController::class);
-
 Route::get('/cart', [App\Http\Controllers\UserController::class, 'showCart'])->name('users.show-cart');
-
-Route::get('/detail', function () {
-    return view('ecommerce.detail');
-});
-
-
+Route::post('/follow', [App\Http\Controllers\UserController::class, 'follow'])->name('follow');
+Route::delete('/unfollow', [App\Http\Controllers\UserController::class, 'unfollow'])->name('unfollow');
 
 Route::get('/about-us', function () {
     return view('ecommerce.about-us');

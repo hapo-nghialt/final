@@ -13,10 +13,10 @@
                 <div class="modal-body container edit-user-form row m-0">
                     <div class="col-md-3 p-0 d-flex justify-content-center flex-column align-items-center">
                         <div class="user-avatar" id="user-avatar">
-                            <img src="{{ asset('images/avatar-null.png') }}" alt="">
+                            <img src="{{ $user->avatar ? asset('storage/avatars/' . $user->avatar) : asset('images/avatar-null.png') }}" alt="">
                         </div>
                         <div class="preview-user-avatar" id="preview-user-avatar">
-                            <img src="#" alt="" id="previewUserAvatar">
+                            <img src="#" alt="" id="previewUserAvatar" class="d-none">
                         </div>
                         <input type="file" hidden name="avatar" id="avatar">
                         <label for="avatar" class="text-change-avatar">
@@ -53,7 +53,7 @@
                                 Số điện thoại
                             </div>
                             <div class="col-9 form-item">
-                                <input type="text" name="phone-number" value="{{ $user->phone_number }}">
+                                <input type="text" name="phone_number" value="{{ $user->phone_number }}">
                             </div>
                         </div>
                     </div>

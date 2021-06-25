@@ -24,7 +24,7 @@
                     <label for="categories[]">thể loại <span>(*)</span></label>
                     <select id="categories[]" name="category" class="d-none">
                         @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->title }}</option>
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                     </select>
                 </div>

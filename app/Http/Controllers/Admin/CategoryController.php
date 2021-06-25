@@ -37,7 +37,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $image = null;
+        if ($request->hasFile('image')) {
+            $image = uniqid() . "_" . $request->image->getClientOriginalName();
+            $request->file('image')->storeAs('public/categories', $image);
+        }
+        Category::create([
+            'name' => $request->name,
+            'image' => $image,
+        ]);
+        return redirect()->back()->with('message', 'Tạo mới thành công');
     }
 
     /**

@@ -100,8 +100,11 @@
 .wrap-pagination-info .page-numbers li .page-number-item:hover,
 .aboutus-info.style-small-left .list-showups label input[type="radio"]:checked + span.check-box,
 .wrap-articles article .info a.btn-to-post:hover,
-.wrap-footer-content .wrap-function-info .fc-info-item{
+.wrap-footer-content .wrap-function-info{
 	border-color: #ff3c45 !important;
+}
+.fc-info-item {
+	border-color: #eeeeee !important;
 }
 .wrap-footer-content .wrap-function-info .fc-info-item .wrap-left-info .fc-desc{
 	color: #ffc2c4 !important;

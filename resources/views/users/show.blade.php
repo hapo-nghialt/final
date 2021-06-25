@@ -11,6 +11,14 @@
             <span>{{ $user->name }}</span>
         </div>
     </div>
+    @if (session()->has('message'))
+        <div class="message-success" id="messageSuccess">
+            <div>
+                <img src="{{ asset('images/add-to-card-successfully.png') }}" alt="">
+                {{ session()->get('message') }}
+            </div>
+        </div>
+    @endif
     <div class="main-content-area">
         <div class="personal-page">
             <div class="personal-card-info">
@@ -19,12 +27,43 @@
                     </div>
                     <div class="personal-card row">
                         <div class="avatar-shop col-4">
-                            <img src="{{ asset('images/avatar-null.png') }}" alt="">
+                            <img src="{{ $user->avatar ? asset('storage/avatars/' . $user->avatar) : asset('images/avatar-null.png') }}" alt="">
                         </div>
                         <div class="col-8 summary-info">
                             <b class="index">{{ $user->name }}</b>
+                            @if (Auth::check() && (Auth::user()->id == $user->id))
                             <div class="update-info" data-toggle="modal" data-target="#editUserModal">Chỉnh sửa thông tin</div>
+                            @endif
                         </div>
+                        @if (!Auth::check())
+                            <div class="col-12 row btn-action-user">
+                                <div class="col-6">
+                                    <button class="btn" onclick="window.location.href='{{ route('login') }}'"><i class="fas fa-plus"></i> THEO DÕI</button>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn" onclick="window.location.href='{{ route('login') }}'"><i class="fas fa-comments"></i> CHAT</button>
+                                </div>
+                            </div>
+                        @elseif (Auth::user()->id !== $user->id)
+                            <div class="col-12 row btn-action-user">
+                                <div class="col-6">
+                                    <input type="hidden" id="followUrl" value="{{ route('follow') }}">
+                                    <input type="hidden" id="unfollowUrl" value="{{ route('unfollow') }}">
+                                    <input type="hidden" id="followerId" value="{{ Auth::user()->id }}">
+                                    <input type="hidden" id="followingId" value="{{ $user->id }}">
+                                    @if ($user->isFollowing($user->id))
+                                    <button class="btn btn-unfollow" id="buttonUnfollow">ĐANG THEO DÕI</button>
+                                    <button class="btn d-none" id="buttonFollow"><i class="fas fa-plus"></i> THEO DÕI</button>
+                                    @else
+                                    <button class="btn btn-unfollow d-none" id="buttonUnfollow">ĐANG THEO DÕI</button>
+                                    <button class="btn" id="buttonFollow"><i class="fas fa-plus"></i> THEO DÕI</button>
+                                    @endif
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn"><i class="fas fa-comments"></i> CHAT</button>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="summary-item personal-items">
@@ -35,12 +74,16 @@
                             <b class="index">{{ $user->number_item }}</b>
                         </p>
                         <p class="summary-info col-6">
-                            <span class="title">Email: </span>
-                            <b class="index">{{ $user->email }}</b>
+                            <span class="title">Người theo dõi: </span>
+                            <b class="index" id="followerNumber">{{ $user->follower }}</b>
                         </p>
                         <p class="summary-info col-6">
                             <span class="title">Địa chỉ: </span>
                             <b class="index">{{ $user->address }}</b>
+                        </p>
+                        <p class="summary-info col-6">
+                            <span class="title">Email: </span>
+                            <b class="index">{{ $user->email }}</b>
                         </p>
                         <p class="summary-info col-6">
                             <span class="title">Số điện thoại: </span>
@@ -54,18 +97,18 @@
                 </div>
             </div>
             <div class="personal-information summary">
-                <div class="summary-item payment-method">
-                    <h4 class="title-box">danh sách sản phẩm</h4>
+                <div class="summary-item payment-method product-content-area">
+                    <h4 class="title">danh sách sản phẩm</h4>
                 </div>
-                <div class="row post-list mx-0">
-                    <ul class="product-list grid-products equal-container">
+                <div class="post-list mx-0">
+                    <ul class="product-list grid-products equal-container row m-0">
                         @foreach($products as $product)
-                            <li class="col-lg-2 col-md-6 col-sm-6 col-xs-6 p-0">
+                            <li class="col-lg-2 col-md-6 col-sm-6 col-xs-6 m-0">
                                 <a href="{{ route('products.show', $product->id) }}">
                                     <div class="product product-style-3">
-                                        <img src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->title }}">
+                                        <img src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->name }}">
                                         <div class="product-info">
-                                            <a href="#" class="product-name"><span>{{ $product->title }}</span></a>
+                                            <a href="#" class="product-name"><span>{{ $product->name }}</span></a>
                                             <div class="wrap-price"><span class="item-price"><span class="currency">₫</span>{{ number_format($product->price, 0) }}</span></div>
                                         </div>
                                     </div>

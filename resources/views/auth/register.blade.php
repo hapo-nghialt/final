@@ -15,8 +15,8 @@
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 col-md-offset-3">
             <div class=" main-content-area">
                 <div class="wrap-login-item ">
-                    <div class="register-form form-item form-stl">
-                        <form method="POST" class="form-stl" action={{ route('register') }}>
+                    <div class="login-form form-item form-stl">
+                        <form method="POST" action={{ route('register') }}>
                             @csrf
                             <fieldset class="wrap-title">
                                 <h3 class="form-title">đăng ký</h3>
