@@ -6,7 +6,7 @@
 @section('content')
     <div class="wrap-breadcrumb">
         <div>
-            <a href="{{ route('home') }}" class="link">Shopee</a>
+            <a href="{{ route('home') }}" class="link">fastBuy</a>
             <i class="fas fa-chevron-right"></i>
             <span>Giỏ Hàng</span>
         </div>
@@ -19,9 +19,7 @@
             </div>
         </div>
     @endif
-    <div class="main-content-area col-lg-12">
-        <h3 class="box-title">Giỏ Hàng</h3>
-    </div>
+    @if ($amount != 0)
     @foreach ($orders as $order)
         <div class="main-content-area col-lg-12">
         <div class="cart-page-shop create-product-form w-100">
@@ -34,9 +32,9 @@
                 </a>
             </div>
             <div class="cart-item row m-0">
-                <div class="cart-item-checkbox d-flex align-items-center justify-content-center">
-                    <input type="checkbox" name="" id="">
-                </div>
+{{--                <div class="cart-item-checkbox d-flex align-items-center justify-content-center">--}}
+{{--                    <input type="checkbox" name="" class="checkBuyProduct" data-amount="{{ $order->amount }}" checked>--}}
+{{--                </div>--}}
                 <div class="cart-item-overview col-lg-4 p-0">
                     <div class="row m-0">
                         <div class="cart-item-overview__image">
@@ -77,4 +75,17 @@
         </div>
     </div>
     @endforeach
+    @endif
+    @if ($amount != 0)
+    <form action="{{ route('user.buy-product') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @foreach ($orders as $order)
+            <input type="hidden" name="orderId[]" value="{{ $order->id }}">
+        @endforeach
+        <div class="btn-order">
+            <span>Tổng tiền: <b>₫{{ number_format($amount, 0) }}</b></span>
+            <button type="submit" class="btn">Mua hàng</button>
+        </div>
+    </form>
+    @endif
 @endsection

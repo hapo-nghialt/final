@@ -26,23 +26,21 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth.admin
 });
 Route::resource('products', App\Http\Controllers\ProductController::class);
 Route::resource('users', App\Http\Controllers\UserController::class);
-Route::resource('orders', App\Http\Controllers\OrderController::class);
-Route::get('/cart', [App\Http\Controllers\UserController::class, 'showCart'])->name('users.show-cart');
+Route::resource('orders', App\Http\Controllers\OrderController::class)->middleware('auth.user');
+Route::resource('messages', App\Http\Controllers\MessageController::class)->middleware('auth.user');
+Route::post('/message', [App\Http\Controllers\MessageController::class, 'sendMessage'])->name('send-message');
+Route::get('/cart', [App\Http\Controllers\UserController::class, 'showCart'])->middleware('auth.user')->name('users.show-cart');
+Route::get('/{id}/orders', [App\Http\Controllers\UserController::class, 'manageOrders'])->middleware('auth.user')->name('users.manage-orders');
 Route::post('/follow', [App\Http\Controllers\UserController::class, 'follow'])->name('follow');
 Route::delete('/unfollow', [App\Http\Controllers\UserController::class, 'unfollow'])->name('unfollow');
-
-Route::get('/about-us', function () {
-    return view('ecommerce.about-us');
-})->name('user.about-us');
-
-Route::get('/shop', function () {
-    return view('ecommerce.shop');
-})->name('user.shop');
-
-Route::get('/checkout', function () {
-    return view('ecommerce.checkout');
-})->name('user.checkout');
-
-Route::get('/contact-us', function () {
-    return view('ecommerce.contact-us');
-})->name('user.contact-us');
+Route::get('/category/{id}', [App\Http\Controllers\CategoryController::class, 'showProduct'])->name('show-products');
+Route::get('/all-products', [App\Http\Controllers\EcommerceController::class, 'seeAllProducts'])->name('see-all-products');
+Route::get('/search-product', [App\Http\Controllers\ProductController::class, 'searchProduct'])->name('search-product');
+Route::post('/follow-product', [App\Http\Controllers\UserController::class, 'followProduct'])->name('user.follow-product');
+Route::post('/buy-product', [App\Http\Controllers\UserController::class, 'buyProduct'])->name('user.buy-product');
+Route::resource('notifications', App\Http\Controllers\NotificationController::class);
+Route::post('/category/{id}', [App\Http\Controllers\ProductController::class, 'filterProduct'])->name('filter-product');
+Route::post('/all-products', [App\Http\Controllers\EcommerceController::class, 'filterProductAll'])->name('filter-product-all');
+Route::get('/cart-empty', function () {
+    return view('ecommerce.cart-empty');
+})->name('user.cart-empty');

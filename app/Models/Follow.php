@@ -13,8 +13,4 @@ class Follow extends Model
         'follower_id',
         'following_id',
     ];
-
-//    public function users() {
-//        return $this->belongsToMany(User::class, 'follows', 'follower_id');
-//    }
 }

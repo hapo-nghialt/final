@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-
+@section('title', 'Quản lý danh mục')
 @section('content')
     <section class="content-header">
         <div class="container-fluid">
@@ -52,7 +52,7 @@
                                             <img src="{{ asset('storage/categories/' . $value->image) }}" alt="" style="width: 90px;">
                                             {{ $value->name }}
                                         </td>
-                                        <td style="padding-top: 45px;">{{ $value->number_products }}</td>
+                                        <td style="padding-top: 45px; text-align: center">{{ number_format($value->number_products, 0) }}</td>
 {{--                                        <td style="padding-top: 38px;">--}}
 {{--                                            <button class="btn btn-danger">Xóa</button>--}}
 {{--                                        </td>--}}

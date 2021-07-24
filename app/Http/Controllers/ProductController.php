@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -54,8 +55,8 @@ class ProductController extends Controller
             'user_id' => Auth::user()->id,
             'category_id' => $request->category,
             'address' => $request->address,
+            'status' => Product::STATUS['show'],
             'price' => $request->price,
-            'bought_status' => 0,
         ]);
 
         return redirect()->route('users.show', Auth::user()->id);
@@ -72,7 +73,8 @@ class ProductController extends Controller
             $product->image_6
         ];
         $numberOrder = Auth::check() ? Auth::user()->number_order : 0;
-        return view('products.show', compact('product', 'subImageName', 'numberOrder'));
+        $user = $product->users()->first();
+        return view('products.show', compact('product', 'subImageName', 'numberOrder', 'user'));
     }
     public function edit($id)
     {
@@ -84,6 +86,25 @@ class ProductController extends Controller
     }
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->delete();
+        return redirect()->back()->with('message', 'Xóa thành công');
+    }
+    public function searchProduct(Request $request)
+    {
+        $keyword = $request->search;
+        $users = User::where('name', 'like', '%' . $keyword . '%')->orWhere('username', 'like', '%' . $keyword . '%')->get();
+        $products = Product::where('name', 'like', '%' . $keyword . '%')->where('status', Product::STATUS['show'])->paginate(12);
+        return view('ecommerce.search', compact('products', 'keyword', 'users'));
+    }
+    public function filterProduct(Request $request)
+    {
+        $category = Category::findOrFail($request->category);
+        if ($request->filter == 'expensive') {
+            $products = Product::where('status', Product::STATUS['show'])->where('category_id', $category->id)->orderBy('price', 'desc')->paginate(12);
+        } else {
+            $products = Product::where('status', Product::STATUS['show'])->where('category_id', $category->id)->orderBy('price', 'asc')->paginate(12);
+        }
+        return view('ecommerce.shop', compact('products', 'category'));
     }
 }

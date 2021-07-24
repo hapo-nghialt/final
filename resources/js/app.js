@@ -1,4 +1,5 @@
 require('./bootstrap');
+require('bootstrap');
 
 require('jquery/dist/jquery.min');
 require('admin-lte/dist/js/adminlte.min');

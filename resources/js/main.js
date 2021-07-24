@@ -91,6 +91,7 @@ $(document).ready(function() {
         $("#cartEmpty").remove();
         if (orderId.includes(productId) == false) {
           $("#numberOrderToCart").html(numberOrder);
+          document.getElementById('urlCart').setAttribute("href", urlCart);
           if (numberOrder == 1) {
             $("#listItem").append(
                 "<div class=\"new-item-text\">Sản phẩm mới thêm</div>" +
@@ -281,4 +282,25 @@ $(document).ready(function() {
     $(this).addClass('d-none');
     $('.chat-content').css({'visibility': 'visible', 'opacity': '1'});
   })
-});
+})
+$('.follow-product').click(function() {
+  url = $('#urlFollowProduct').val();
+  productId = $(this).data('id');
+  userId = $('#userId').val();
+  $.ajax({
+    url: url,
+    type: "POST",
+    data: {
+      userId: userId,
+      productId: productId
+    },
+    success: function (result) {
+
+    }
+  })
+  if ($(this).hasClass('followed')) {
+    $(this).removeClass('followed');
+  } else {
+    $(this).addClass('followed');
+  }
+})

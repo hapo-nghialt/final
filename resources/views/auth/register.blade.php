@@ -6,7 +6,7 @@
 @section('content')
     <div class="wrap-breadcrumb">
         <div>
-            <a href="#" class="link">Shopee</a>
+            <a href="#" class="link">fastBuy</a>
             <i class="fas fa-chevron-right"></i>
             <span>Đăng Ký</span>
         </div>

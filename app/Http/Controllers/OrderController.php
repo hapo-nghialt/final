@@ -6,12 +6,12 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 
 class OrderController extends Controller
 {
     public function index()
     {
-        //
     }
     public function create()
     {
@@ -22,7 +22,11 @@ class OrderController extends Controller
         $user = Auth::user();
         $orderCheck = Order::where('product_id', $request->productId)
             ->where('customer_id', Auth::user()->id)
+            ->where('deleted_at', null)
             ->where('status', Order::STATUS['ordered'])->first();
+        $product = Product::findOrFail($request->productId);
+        $shopId = $product->user_id;
+        $orderId = 'ORD' . '-' . $request->customerId . '-' . $shopId . '-' . uniqid();
         if ($orderCheck == null) {
             Order::create([
                 'product_id' => $request->productId,
@@ -30,6 +34,8 @@ class OrderController extends Controller
                 'amount' => $request->amount,
                 'status' => Order::STATUS['ordered'],
                 'customer_id' => $request->customerId,
+                'shop_id' => $shopId,
+                'order_id' => $orderId,
             ]);
         } else {
             $orderCheck->update([
@@ -37,7 +43,6 @@ class OrderController extends Controller
                 'amount' => $orderCheck->amount + $request->amount,
             ]);
         };
-        $product = Product::findOrFail($request->productId);
         $productImage = asset('storage/products/' . $product->image);
         $productUrl = route('products.show', $request->productId);
         return response()->json([
@@ -50,7 +55,7 @@ class OrderController extends Controller
     }
     public function show($id)
     {
-        //
+
     }
     public function edit($id)
     {

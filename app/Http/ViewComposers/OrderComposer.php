@@ -2,6 +2,7 @@
 namespace App\Http\ViewComposers;
 
 use App\Models\Notification;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -27,8 +28,8 @@ class OrderComposer
     {
         if (Auth::user()) {
             $user = Auth::user();
-            $orders = $user->orders()->get();
-            $notifications = Notification::where('receiver_id', $user->id)->get();
+            $orders = $user->orders()->where('status', Order::STATUS['ordered'])->get();
+            $notifications = Notification::where('receiver_id', $user->id)->orderBy('id', 'desc')->take(5)->get();
             $view->with('orders', $orders)->with('notifications', $notifications);
         }
     }

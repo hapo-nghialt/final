@@ -45,7 +45,6 @@
 
 .product-style-1 .product-info .wrap-btn a::after,
 .primary .menu-item.home-icon,
-.center-section .wrap-search-form button,
 .wrap-banner .banner-link,
 .wrap-main-slide .slide-1 .btn-link,
 .wrap-main-slide .slide-3 .btn-link,
@@ -69,7 +68,10 @@
 .summary-item .btn,
 .choose-payment-methods .payment-method input[type=radio]:checked + span::before,
 .main-info-area .right-section .wrap-icon-section.minicart .index{
-	background: #ee4d2d;
+	background: rgb(26, 148, 255);
+}
+.center-section .wrap-search-form button {
+	background: #ffffff !important;
 }
 .wrap-product-detail .detail-info .wrap-buttons .add-to-cart:hover{
 	background-color: rgba(255,87,34,.15);

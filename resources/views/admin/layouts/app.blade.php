@@ -3,8 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
-
+    <title>@yield('title')</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
@@ -20,9 +19,6 @@
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="index3.html" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -140,9 +136,9 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="index3.html" class="brand-link">
-            <img src="https://cdn1.iconfinder.com/data/icons/shiba-inu/500/Shiba_Inu_Emoticon-14-512.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <a href="{{ route('home') }}" class="brand-link">
+            <img src="{{ asset('images/avatar-null.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <span class="brand-text font-weight-light">fastBuy</span>
         </a>
 
         <!-- Sidebar -->
@@ -150,10 +146,10 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="https://cdn1.iconfinder.com/data/icons/shiba-inu/500/Shiba_Inu_Emoticon-14-512.png" class="img-circle elevation-2" alt="User Image">
+                    <img src="{{ asset('storage/avatars/' . Auth::user()->avatar) }}" class="img-circle elevation-2" alt="User Image" style="height: 2.1rem; object-fit: cover">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">Alexander Pierce</a>
+                    <a href="#" class="d-block">{{ Auth::user()->name }}</a>
                 </div>
             </div>
 
@@ -177,14 +173,6 @@
                                 Quản lý thành viên
                             </p>
                         </a>
-{{--                        <ul class="nav nav-treeview">--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a href="{{ route('admin.users.index') }}" class="nav-link active">--}}
-{{--                                    <i class="fas fa-list-ol nav-icon"></i>--}}
-{{--                                    <p>Member list</p>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('admin.categories.index') }}" class="nav-link {{ Route::is('admin.categories.index') ? 'active' : '' }}">
@@ -198,7 +186,7 @@
                         <a href="{{ route('admin.products.index') }}" class="nav-link {{ Route::is('admin.products.index') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-cart-plus"></i>
                             <p>
-                                Quản lý bài đăng
+                                Quản lý sản phẩm
                             </p>
                         </a>
                     </li>
@@ -210,10 +198,9 @@
         @yield('content')
     </div>
     <footer class="main-footer">
-        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-        All rights reserved.
+        <strong>Đồ án tốt nghiệp <a href="{{ route('home') }}">fastBuy</a>.</strong>
         <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 3.1.0
+            <b>Lê Trọng Nghĩa</b> 20162904
         </div>
     </footer>
 

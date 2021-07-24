@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Notification;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -42,11 +45,22 @@ class ProductController extends Controller
     public function updateStatus($id)
     {
         $product = Product::findOrFail($id);
+        $user = $product->users()->first();
         if ($product->status == Product::STATUS['hide']) {
             $product->update([
                 'status' => Product::STATUS['show'],
             ]);
+            Notification::create([
+                'sender_id' => Auth::user()->id,
+                'receiver_id' => $user->id,
+                'content' => 'Sản phẩm của bạn (' . $product->name . ') đã được hiển thị trở lại!',
+            ]);
         } else {
+            Notification::create([
+                'sender_id' => Auth::user()->id,
+                'receiver_id' => $user->id,
+                'content' => 'Sản phẩm của bạn (' . $product->name . ') đã tạm thời bị admin ẩn!',
+            ]);
             $product->update([
                 'status' => Product::STATUS['hide'],
             ]);

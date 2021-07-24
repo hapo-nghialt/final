@@ -59,6 +59,10 @@ class User extends Authenticatable
         return $this->hasMany(Order::class, 'customer_id');
     }
 
+    public function manageOrders() {
+        return $this->hasMany(Order::class, 'shop_id');
+    }
+
     public function getCreatedDateFormat()
     {
         $createdAt = Carbon::parse($this->created_at)->format('d-m-Y');
@@ -67,16 +71,30 @@ class User extends Authenticatable
 
     public function getNumberItemAttribute()
     {
-        return $this->products()->count();
+        return $this->products()->where('status', Product::STATUS['show'])->count();
     }
 
     public function getNumberOrderAttribute()
     {
-        return $this->orders()->count();
+        return $this->orders()->where('status', Order::STATUS['ordered'])->count();
     }
 
     public function isFollowing($id) {
-        $follower = Follow::where('follower_id', Auth::user()->id)->where('following_id', $id)->first();
+        $follower = Follow::where('follower_id', Auth::id())->where('following_id', $id)->first();
         return (isset($follower));
+    }
+
+    public function getLastMessage($id)
+    {
+        $user_id = Auth::id();
+        $lastMessage = Message::where(function ($query) use ($id, $user_id) {
+            $query->where('from', $user_id)->where('to', $id);
+        })->orWhere(function ($query) use ($id, $user_id) {
+            $query->where('from', $id)->where('to', $user_id);
+        })->orderBy('id', 'desc')->first();
+        if (isset($lastMessage)) {
+            return $lastMessage->message;
+        }
+        return null;
     }
 }

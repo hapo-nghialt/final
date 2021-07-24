@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-
+@section('title', 'Quản lý thành viên')
 @section('content')
     <section class="content-header">
         <div class="container-fluid">
@@ -44,8 +44,9 @@
                                         <td>{{ $value->email }}</td>
                                         <td>{{ $value->phone_number }}</td>
                                         <td>{{ $value->address }}</td>
-                                        <td>
+                                        <td class="text-center">
                                             <a href="{{ route('users.show', $value->id) }}" class="btn btn-primary">Xem</a>
+                                            <a href="" class="btn btn-danger">Xóa</a>
                                         </td>
                                     </tr>
                                 @endforeach

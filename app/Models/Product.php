@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Product extends Model
 {
@@ -22,7 +23,6 @@ class Product extends Model
         'user_id',
         'category_id',
         'status',
-        'bought_status',
         'address',
         'price'
     ];
@@ -32,19 +32,30 @@ class Product extends Model
         'show' => 1,
     ];
 
-    public function users() {
+    public function users()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function categories() {
+    public function categories()
+    {
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public function getNameCategoryAttribute() {
+    public function getNameCategoryAttribute()
+    {
         return $this->categories->name;
     }
 
-    public function getNameShopAttribute() {
+    public function getNameShopAttribute()
+    {
         return $this->users->name;
+    }
+
+    public function checkIfUserFollowProduct() {
+        if (UsersFollowProducts::where('product_id', $this->id)->where('user_id', Auth::id())->first() != null) {
+            return true;
+        }
+        return false;
     }
 }

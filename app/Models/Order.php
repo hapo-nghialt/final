@@ -17,16 +17,24 @@ class Order extends Model
         'amount',
         'status',
         'customer_id',
+        'shop_id',
+        'order_id'
     ];
 
     const STATUS=[
         'ordered' => 0,
-        'paid' => 1,
+        'unpaid' => 1,
+        'paid' => 2,
     ];
 
     public function users()
     {
         return $this->belongsTo(User::class, 'customer_id');
+    }
+
+    public function manageOrders()
+    {
+        return $this->belongsTo(User::class, 'shop_id');
     }
 
     public function products()
@@ -38,5 +46,9 @@ class Order extends Model
     {
         $product = $this->products()->first();
         return (User::where('id', $product->user_id)->first());
+    }
+
+    public function getCustomerNameAttribute() {
+        return User::where('id', $this->customer_id)->first()->name;
     }
 }
